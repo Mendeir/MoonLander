@@ -89,4 +89,7 @@ public class Rocket {
         }
         return thruster_flame;
     }
+
+    public void setShape(Shape new_lander_shape){ rocketShape = new_lander_shape; }
+    public Shape getShape(){ return rocketShape; }
 }

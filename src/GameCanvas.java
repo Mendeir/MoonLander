@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -50,7 +51,7 @@ public class GameCanvas extends Canvas implements KeyListener, ActionListener {
     public void splashWindow(Graphics graphic) {
         BufferedImage image = null;
         try {
-            image = ImageIO.read(GameCanvas.class.getResource("/assets/images/SplashScreen720p.jpg"));
+            image = ImageIO.read(Objects.requireNonNull(GameCanvas.class.getResource("/assets/images/SplashScreen720p.jpg")));
         } catch (IOException exception) {
             exception.printStackTrace();
         }
@@ -61,7 +62,7 @@ public class GameCanvas extends Canvas implements KeyListener, ActionListener {
     public void mainMenuWindow(Graphics graphic) {
         BufferedImage image = null;
         try {
-            image = ImageIO.read(GameCanvas.class.getResource("/assets/images/TitleScreen720p.jpg"));
+            image = ImageIO.read(Objects.requireNonNull(GameCanvas.class.getResource("/assets/images/TitleScreen720p.jpg")));
         } catch (IOException exception) {
             exception.printStackTrace();
         }

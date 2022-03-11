@@ -33,6 +33,10 @@ public class GameWindow {
         splashFrame = new JFrame("Splash Screen");
         splashPanel = new JPanel();
 
+        splashFrame.setSize(gameWidth, gameHeight);
+        splashFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        splashFrame.setVisible(true);
+        splashFrame.setLocationRelativeTo(null);
 
     }
 

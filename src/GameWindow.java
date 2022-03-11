@@ -14,10 +14,6 @@ public class GameWindow {
     //JPanels
     JPanel splashPanel;
 
-    GameWindow(){
-
-    }
-
     public void createAndShowCanvas() {
         frame.setVisible(true);
         frame.setBounds(350,40, gameWidth, gameHeight);

@@ -28,25 +28,11 @@ public class GameCanvas extends Canvas implements KeyListener, ActionListener {
         super.paint(graphic);
 
         if (onSplashScreen) {
-            BufferedImage image = null;
-            try {
-                image = ImageIO.read(GameCanvas.class.getResource("/assets/SplashScreen720p.jpg"));
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
-
-            graphic.drawImage(image, 0, 0, this);
+           splashWindow(graphic);
         }
 
         if (onMainMenu) {
-            BufferedImage image = null;
-            try {
-                image = ImageIO.read(GameCanvas.class.getResource("/assets/TitleScreen720p.jpg"));
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
-
-            graphic.drawImage(image, 0, 0, this);
+           mainMenuWindow(graphic);
         }
 
         if (gameStarted) {
@@ -56,6 +42,28 @@ public class GameCanvas extends Canvas implements KeyListener, ActionListener {
             graphic2D.drawImage(gameView,0,0,null);
         }
 
+    }
+
+    public void splashWindow(Graphics graphic) {
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(GameCanvas.class.getResource("/assets/SplashScreen720p.jpg"));
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
+        graphic.drawImage(image, 0, 0, this);
+    }
+
+    public void mainMenuWindow(Graphics graphic) {
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(GameCanvas.class.getResource("/assets/TitleScreen720p.jpg"));
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
+        graphic.drawImage(image, 0, 0, this);
     }
 
     public BufferedImage bufferedGame(){

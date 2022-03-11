@@ -2,17 +2,21 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.*;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 
 public class GameCanvas extends Canvas implements KeyListener, ActionListener {
 
-    Rocket rocket;
-    public boolean started;
+    private Rocket rocket;
+
+    //Game Conditions
+    private boolean gameStarted;
+    private boolean onSplashScreen;
+    private boolean onMainMenu;
 
     GameCanvas(){
-        started = false;
+        onSplashScreen = true;
+        gameStarted = false;
+
         rocket = new Rocket(10,50,500);
         addKeyListener(this);
         setBackground(Color.black);
@@ -20,34 +24,46 @@ public class GameCanvas extends Canvas implements KeyListener, ActionListener {
 
     }
 
-    public void paint(Graphics g){
-        
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(GameCanvas.class.getResource("/assets/SplashScreen720p.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void paint(Graphics graphic){
+        super.paint(graphic);
+
+        if (onSplashScreen) {
+            BufferedImage image = null;
+            try {
+                image = ImageIO.read(GameCanvas.class.getResource("/assets/SplashScreen720p.jpg"));
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+
+            graphic.drawImage(image, 0, 0, this);
         }
 
-        Graphics2D gd = (Graphics2D)g;
-        super.paint(g);
-        BufferedImage gameView = bufferedGame();
-        //gd.drawImage(gameView,0,0,null);
-        g.drawImage(image, 0, 0, this);
+        if (onMainMenu) {
+            BufferedImage image = null;
+            try {
+                image = ImageIO.read(GameCanvas.class.getResource("/assets/TitleScreen720p.jpg"));
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+
+            graphic.drawImage(image, 0, 0, this);
+        }
+
+        if (gameStarted) {
+            Graphics2D graphic2D = (Graphics2D)graphic;
+
+            BufferedImage gameView = bufferedGame();
+            graphic2D.drawImage(gameView,0,0,null);
+        }
+
     }
 
     public BufferedImage bufferedGame(){
         BufferedImage b = new BufferedImage(this.getWidth(),this.getHeight(),BufferedImage.TYPE_INT_RGB);
         Graphics2D g = b.createGraphics();
 
-
-
-
-
-        if (started) {
-            g.setPaint(Color.white);
-            g.draw(rocket.getShape());
-        }
+        g.setPaint(Color.white);
+        g.draw(rocket.getShape());
 
         return b;
     }
@@ -72,6 +88,15 @@ public class GameCanvas extends Canvas implements KeyListener, ActionListener {
         }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
             System.out.println("right");
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_F) {
+            if (onSplashScreen) {
+                onSplashScreen = false;
+                onMainMenu = true;
+            }
+
+            repaint();
         }
     }
 

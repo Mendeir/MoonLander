@@ -6,7 +6,7 @@ import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class GameCanvas extends Canvas implements KeyListener, ActionListener {
+public class GameCanvas extends Canvas implements KeyListener, ActionListener{
 
     private Rocket rocket;
 
@@ -17,7 +17,7 @@ public class GameCanvas extends Canvas implements KeyListener, ActionListener {
 
     private JPanel mainMenuPanel;
 
-    GameCanvas(){
+    public GameCanvas(){
         onSplashScreen = true;
         gameStarted = false;
 
@@ -101,19 +101,28 @@ public class GameCanvas extends Canvas implements KeyListener, ActionListener {
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
             System.out.println("right");
         }
-
-        if (e.getKeyCode() == KeyEvent.VK_F) {
-            if (onSplashScreen) {
-                onSplashScreen = false;
-                onMainMenu = true;
-            }
-
-            repaint();
-        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    //Setter and Getter
+
+    public boolean isOnSplashScreen() {
+        return onSplashScreen;
+    }
+
+    public void setOnSplashScreen(boolean onSplashScreen) {
+        this.onSplashScreen = onSplashScreen;
+    }
+
+    public boolean isOnMainMenu() {
+        return onMainMenu;
+    }
+
+    public void setOnMainMenu(boolean onMainMenu) {
+        this.onMainMenu = onMainMenu;
     }
 }

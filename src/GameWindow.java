@@ -1,8 +1,9 @@
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
-
-public class GameWindow {
+public class GameWindow implements KeyListener, ActionListener {
 
     //Screen Dimension
     int gameWidth = 1280;
@@ -17,17 +18,66 @@ public class GameWindow {
 
     //JPanels
     JPanel splashPanel;
+    JPanel mainMenuButtonsPanel;
+
+    public GameWindow() {
+        canvas = new GameCanvas();
+    }
 
     public void createAndShowCanvas() {
         canvasFrame = new JFrame("Moon Lander");
-        canvas = new GameCanvas();
 
         canvasFrame.setSize(gameWidth, gameHeight);
         canvasFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         canvasFrame.setVisible(true);
         canvasFrame.setLocationRelativeTo(null);
 
+        //Main Menu Buttons
+        mainMenuButtonsPanel = new JPanel();
+        mainMenuButtonsPanel.setBounds(0, 0, 200, 200);
+        mainMenuButtonsPanel.setBackground(Color.BLUE);
+        mainMenuButtonsPanel.setVisible(false);
+        canvasFrame.add(mainMenuButtonsPanel);
+
+        canvas.addKeyListener(this);
         canvasFrame.add(canvas);
+
+
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_UP){
+            System.out.println("up");
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_F) {
+            if(canvas.isOnSplashScreen()) {
+                canvas.setOnSplashScreen(false);
+                canvas.setOnMainMenu(true);
+                mainMenuButtonsPanel.setVisible(true);
+                System.out.println("Press F");
+            }
+
+            canvas.repaint();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+
     }
 
     /*public void createAndShowSplashScreen () {

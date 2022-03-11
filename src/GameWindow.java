@@ -20,6 +20,12 @@ public class GameWindow implements KeyListener, ActionListener {
     JPanel splashPanel;
     JPanel mainMenuButtonsPanel;
 
+    //Main Menu Buttons
+    JButton newGameButton;
+    JButton settingButton;
+    JButton rankingButton;
+    JButton exitButton;
+
     public GameWindow() {
         canvas = new GameCanvas();
     }
@@ -33,22 +39,41 @@ public class GameWindow implements KeyListener, ActionListener {
         canvasFrame.setLocationRelativeTo(null);
 
         //Main Menu Buttons
-        mainMenuButtonsPanel = new JPanel();
-        mainMenuButtonsPanel.setBounds(0, 0, 200, 200);
-        mainMenuButtonsPanel.setBackground(Color.BLUE);
-        mainMenuButtonsPanel.setVisible(false);
-        canvasFrame.add(mainMenuButtonsPanel);
+        createMainMenuButtons();
+
 
         canvas.addKeyListener(this);
         canvasFrame.add(canvas);
+    }
+
+    public void createMainMenuButtons() {
+        mainMenuButtonsPanel = new JPanel();
+        mainMenuButtonsPanel.setBounds((gameWidth - 400) / 2, 300, 400, 300);
+        mainMenuButtonsPanel.setBackground(Color.BLUE);
+        mainMenuButtonsPanel.setVisible(false);
+
+        newGameButton = new JButton("New Game");
+        newGameButton.setBounds(0, 0, 400, 75);
+        settingButton = new JButton("Settings");
+        settingButton.setBounds(0, 75, 400, 75);
+        rankingButton = new JButton("Rankings");
+        rankingButton.setBounds(0, 150, 400, 75);
+        exitButton = new JButton("Exit");
+        exitButton.setBounds(0, 225, 400, 75);
+
+        mainMenuButtonsPanel.setLayout(null);
+        mainMenuButtonsPanel.add(newGameButton);
+        mainMenuButtonsPanel.add(settingButton);
+        mainMenuButtonsPanel.add(rankingButton);
+        mainMenuButtonsPanel.add(exitButton);
 
 
-
+        canvasFrame.add(mainMenuButtonsPanel);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        System.out.println("Action Performed");
     }
 
     @Override

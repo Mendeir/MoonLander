@@ -6,7 +6,7 @@ import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class GameCanvas extends Canvas implements KeyListener, ActionListener{
+public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     private Rocket rocket;
 

@@ -1,6 +1,7 @@
 
 import javax.swing.*;
 
+
 public class GameWindow {
 
     //Screen Dimension
@@ -29,15 +30,22 @@ public class GameWindow {
         canvasFrame.add(canvas);
     }
 
-    public void createAndShowSplashScreen () {
+    /*public void createAndShowSplashScreen () {
         splashFrame = new JFrame("Splash Screen");
         splashPanel = new JPanel();
 
         splashFrame.setSize(gameWidth, gameHeight);
         splashFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        splashFrame.setVisible(true);
         splashFrame.setLocationRelativeTo(null);
+        splashFrame.setVisible(true);
 
-    }
+        ImageIcon img = new ImageIcon("SplashScreen.jpg");
+        JLabel background = new JLabel("", img, JLabel.CENTER);
+        background.setBounds(0, 0, gameWidth, gameHeight);
+
+        //splashPanel.add(background);
+        splashFrame.add(background);
+
+    }*/
 
 }

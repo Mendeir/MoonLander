@@ -7,21 +7,26 @@ public class GameWindow {
     int gameWidth = 1280;
     int gameHeight = 720;
 
+    //Canvas
+    GameCanvas canvas;
+
     //JFrames
-    JFrame frame = new JFrame("Moon Lander");
+    JFrame canvasFrame;
     JFrame splashFrame;
 
     //JPanels
     JPanel splashPanel;
 
     public void createAndShowCanvas() {
-        frame.setVisible(true);
-        frame.setBounds(350,40, gameWidth, gameHeight);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        canvasFrame = new JFrame("Moon Lander");
+        canvas = new GameCanvas();
 
+        canvasFrame.setSize(gameWidth, gameHeight);
+        canvasFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        canvasFrame.setVisible(true);
+        canvasFrame.setLocationRelativeTo(null);
 
-        GameCanvas canvas = new GameCanvas();
-        frame.add(canvas);
+        canvasFrame.add(canvas);
     }
 
     public void createAndShowSplashScreen () {

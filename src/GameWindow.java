@@ -23,6 +23,9 @@ public class GameWindow implements KeyListener, ActionListener {
     JPanel settingButtonPanel;
     JPanel rankingsButtonPanel;
 
+    //JLabel
+    JLabel namePromptLabel;
+
     //Main Menu Buttons
     JButton newGameButton;
     JButton settingButton;
@@ -97,6 +100,12 @@ public class GameWindow implements KeyListener, ActionListener {
         newGamePanel.setBackground(new Color(0, 0, 0, (float) 0.7));
         newGamePanel.setLayout(null);
         newGamePanel.setVisible(false);
+
+        namePromptLabel = new JLabel("Enter your name");
+        namePromptLabel.setBounds((gameWidth - 300) / 2, 50, 300, 50);
+        namePromptLabel.setForeground(Color.white);
+
+        newGamePanel.add(namePromptLabel);
 
         canvasFrame.add(newGamePanel);
     }

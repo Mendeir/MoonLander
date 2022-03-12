@@ -31,6 +31,7 @@ public class GameWindow implements KeyListener, ActionListener {
 
     //JLabel
     JLabel namePromptLabel;
+    JLabel levelSelectLabel;
 
     //Main Menu Buttons
     JButton newGameButton;
@@ -174,6 +175,32 @@ public class GameWindow implements KeyListener, ActionListener {
         levelSelectPanel.setBackground(new Color(0, 0, 0, (float) 0.7));
         levelSelectPanel.setLayout(null);
         levelSelectPanel.setVisible(false);
+
+        levelSelectLabel = new JLabel("Level Select");
+        levelSelectLabel.setBounds(475, 200, 200, 50);
+        levelSelectLabel.setFont(gameFont);
+        levelSelectLabel.setForeground(Color.WHITE);
+        levelSelectPanel.add(levelSelectLabel);
+
+        levelOneButton = new JButton("Level 1");
+        levelOneButton.setBounds(460, 260, 200, 50);
+        levelOneButton.addActionListener(this);
+        levelSelectPanel.add(levelOneButton);
+
+        levelTwoButton = new JButton("Level 2");
+        levelTwoButton.setBounds(460, 320, 200, 50);
+        levelTwoButton.addActionListener(this);
+        levelSelectPanel.add(levelTwoButton);
+
+        levelThreeButton = new JButton("Level 3");
+        levelThreeButton.setBounds(460, 380, 200, 50);
+        levelThreeButton.addActionListener(this);
+        levelSelectPanel.add(levelThreeButton);
+
+        levelSelectBack = new JButton("Back");
+        levelSelectBack.setBounds(460, 440, 200, 50);
+        levelSelectBack.addActionListener(this);
+        levelSelectPanel.add(levelSelectBack);
 
         canvasFrame.add(levelSelectPanel);
     }

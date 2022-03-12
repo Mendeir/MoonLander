@@ -52,7 +52,8 @@ public class GameWindow implements KeyListener, ActionListener {
     }
 
     public void createMainMenuBackButton() {
-
+        mainMenuBackButton = new JButton ("Back");
+        mainMenuBackButton.setBounds(0, 0, 250, 250);
     }
 
     public void createMainMenuButtons() {
@@ -92,6 +93,8 @@ public class GameWindow implements KeyListener, ActionListener {
         newGamePanel.setBackground(new Color(0, 0, 0, (float) 0.7));
         newGamePanel.setVisible(false);
 
+        createMainMenuBackButton();
+        newGamePanel.add(mainMenuBackButton);
         canvasFrame.add(newGamePanel);
     }
 

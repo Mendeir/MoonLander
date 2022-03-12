@@ -58,7 +58,6 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         }
 
         graphic.drawImage(image, 0, 0, this);
-      terrain.draw(g);
     }
 
     public void mainMenuWindow(Graphics graphic) {
@@ -71,7 +70,6 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
 
         graphic.drawImage(image, 0, 0, this);
-
     }
 
     public BufferedImage bufferedGame(){

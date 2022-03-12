@@ -27,6 +27,7 @@ public class GameWindow implements KeyListener, ActionListener {
     JPanel newGamePanel;
     JPanel settingButtonPanel;
     JPanel rankingsButtonPanel;
+    JPanel levelSelectPanel;
 
     //JLabel
     JLabel namePromptLabel;
@@ -38,6 +39,10 @@ public class GameWindow implements KeyListener, ActionListener {
     JButton exitButton;
     JButton mainMenuBackButton;
     JButton submitName;
+    JButton levelOneButton;
+    JButton levelTwoButton;
+    JButton levelThreeButton;
+    JButton levelSelectBack;
 
     //JTextField
     JTextField nameInput;
@@ -71,6 +76,7 @@ public class GameWindow implements KeyListener, ActionListener {
         createNewGameButtons();
         createSettingButtons();
         createRankingButton();
+        createLevelSelectButton();
 
         canvas.addKeyListener(this);
         canvasFrame.add(canvas);
@@ -162,6 +168,16 @@ public class GameWindow implements KeyListener, ActionListener {
         canvasFrame.add(rankingsButtonPanel);
     }
 
+    public void createLevelSelectButton() {
+        levelSelectPanel = new JPanel();
+        levelSelectPanel.setBounds((gameWidth - 1100) / 2, 40, 1100, 600);
+        levelSelectPanel.setBackground(new Color(0, 0, 0, (float) 0.7));
+        levelSelectPanel.setLayout(null);
+        levelSelectPanel.setVisible(false);
+
+        canvasFrame.add(levelSelectPanel);
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent event) {
@@ -189,12 +205,13 @@ public class GameWindow implements KeyListener, ActionListener {
              settingButtonPanel.setVisible(false);
              rankingsButtonPanel.setVisible(false);
              mainMenuButtonsPanel.setVisible(true);
-             System.out.println("Called");
          }
 
          if (event.getSource() == submitName) {
              username = nameInput.getText();
              System.out.println(username);
+             newGamePanel.setVisible(false);
+             levelSelectPanel.setVisible(true);
          }
 
          if (event.getSource() == exitButton) {

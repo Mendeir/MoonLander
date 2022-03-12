@@ -19,6 +19,9 @@ public class GameWindow implements KeyListener, ActionListener {
     //JPanels
     JPanel splashPanel;
     JPanel mainMenuButtonsPanel;
+    JPanel newGamePanel;
+    JPanel settingButtonsPanel;
+    JPanel rankingsPanel;
 
     //Main Menu Buttons
     JButton newGameButton;
@@ -39,6 +42,7 @@ public class GameWindow implements KeyListener, ActionListener {
         canvasFrame.setLocationRelativeTo(null);
 
         createMainMenuButtons();
+        createSettingButtons();
 
 
         canvas.addKeyListener(this);
@@ -81,7 +85,12 @@ public class GameWindow implements KeyListener, ActionListener {
     }
 
     public void createSettingButtons() {
+        settingButtonsPanel = new JPanel();
+        settingButtonsPanel.setBounds((gameWidth - 1100) / 2, 40, 1100, 600);
+        settingButtonsPanel.setBackground(new Color(0, 0, 0, (float) 0.7);
+        settingButtonsPanel.setVisible(false);
 
+        canvasFrame.add(settingButtonsPanel);
     }
 
     public void createRankingButton() {
@@ -92,24 +101,22 @@ public class GameWindow implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
          if (event.getSource() == newGameButton) {
-
+             mainMenuButtonsPanel.setVisible(false);
          }
 
          if (event.getSource() == settingButton) {
+             mainMenuButtonsPanel.setVisible(false);
+             settingButtonsPanel.setVisible(true);
 
          }
 
          if (event.getSource() == rankingButton) {
-
+             mainMenuButtonsPanel.setVisible(false);
          }
 
          if (event.getSource() == exitButton) {
-             System.out.println("Exit Button");
             System.exit(0);
          }
-
-
-        System.out.println("Action Performed");
     }
 
     @Override

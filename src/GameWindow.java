@@ -81,7 +81,12 @@ public class GameWindow implements KeyListener, ActionListener {
     }
 
     public void createNewGameButtons() {
+        newGamePanel = new JPanel();
+        newGamePanel.setBounds((gameWidth - 1100) / 2, 40, 1100, 600);
+        newGamePanel.setBackground(new Color(0, 0, 0, (float) 0.7));
+        newGamePanel.setVisible(false);
 
+        canvasFrame.add(newGameButton);
     }
 
     public void createSettingButtons() {

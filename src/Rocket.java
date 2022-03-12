@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.desktop.AboutEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 
@@ -23,6 +25,7 @@ public class Rocket {
     private Shape rocketShape;
     private Shape flameShape;
 
+
     //Rocket Initialization
     public Rocket (int xPosition, int yPosition, int fuel){
         this.horizontalForce = 10;
@@ -31,9 +34,26 @@ public class Rocket {
         this.scale = 1;
         this.fuel = fuel;
         this.isThrusting = false;
+        this.thrustAmount = 0.1;
         rocketTop = new  Point2D.Double(xPosition, yPosition);
         rocketShape =  initializeLanderShape(rocketTop);
         flameShape = initializeThrusterShape(rocketTop);
+    }
+
+    public Shape getNewRotatedShape(Shape shape, double rotation){
+        AffineTransform affine = new AffineTransform();
+        Rectangle rect = shape.getBounds();
+        affine.rotate(Math.toRadians(rotation), rect.getX() + rect.width/2, rect.getY() + rect.height/2);
+        Shape result_shape = affine.createTransformedShape(shape);
+        return result_shape;
+    }
+
+    public Shape getNewRotatedShape(Shape shape, double rotation, Point2D center){
+        AffineTransform at = new AffineTransform();
+        Rectangle bounds = shape.getBounds();
+        at.rotate(Math.toRadians(rotation), center.getX(), center.getY());
+        Shape result_shape = at.createTransformedShape(shape);
+        return result_shape;
     }
 
     //method to create the initial lander shape based on given center:
@@ -90,6 +110,23 @@ public class Rocket {
         return thruster_flame;
     }
 
+
+    // setters and getters
     public void setShape(Shape new_lander_shape){ rocketShape = new_lander_shape; }
     public Shape getShape(){ return rocketShape; }
+    public Shape getFlameShape(){ return flameShape; }
+    public double getHorizontalForce(){ return horizontalForce;}
+    public double getVerticalForce(){ return verticalForce;}
+    public void setHorizontalForce(double new_force){ horizontalForce = new_force; }
+    public void setVerticalForce(double new_force){ verticalForce = new_force; }
+    public void setRocketTop(Point2D top){ rocketTop = top; }
+    public Point2D getRocketTop(){ return rocketTop; }
+    public double getX(){ return rocketTop.getX(); }
+    public double getY(){ return rocketTop.getY(); }
+    public void setRotation(double new_rotation){ rotation = new_rotation; }
+    public void setFlameShape(Shape new_shape){ flameShape = new_shape; }
+    public void setThrusting(boolean gas){ isThrusting = gas; }
+    public boolean getThrusting(){ return isThrusting; }
+    public void setThrustAmount(double amount){ thrustAmount = amount; }
+    public double getThrustAmount() {return thrustAmount; }
 }

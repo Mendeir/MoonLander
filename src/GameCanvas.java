@@ -11,12 +11,15 @@ import javax.swing.Timer;
 public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     private Rocket rocket;
+
     Timer timer;
     public int xPos = 80;
     public int yPos = 50;
     private double rotation = 0;
     private final double THRUST_CONSTANT = 0.5;
     private final double GRAVITY_CONSTANT = 0.3;
+
+    Terrain terrain = new Terrain();
 
     //Game Conditions
     private boolean gameStarted;
@@ -79,10 +82,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             exception.printStackTrace();
         }
 
-        Graphics2D gd = (Graphics2D)graphic;
-        super.paint(graphic);
-        BufferedImage gameView = bufferedGame();
-        gd.drawImage(gameView,0,0,null);
+        graphic.drawImage(image, 0, 0, this);
 
     }
 

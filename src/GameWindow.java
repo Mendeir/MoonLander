@@ -241,6 +241,23 @@ public class GameWindow implements KeyListener, ActionListener {
              levelSelectPanel.setVisible(true);
          }
 
+         if (event.getSource() == levelSelectBack) {
+             levelSelectPanel.setVisible(false);
+             newGamePanel.setVisible(true);
+         }
+
+         if (event.getSource() == levelOneButton) {
+             System.out.println("Level 1");
+         }
+
+         if (event.getSource() == levelTwoButton) {
+             System.out.println("Level 2");
+         }
+
+         if (event.getSource() == levelThreeButton) {
+             System.out.println("Level 3");
+         }
+
          if (event.getSource() == exitButton) {
             System.exit(0);
          }

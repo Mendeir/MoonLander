@@ -130,7 +130,9 @@ public class GameWindow implements KeyListener, ActionListener {
         nameInput.setBounds(420, 250, 300, 50);
         newGamePanel.add(nameInput);
 
-
+        submitName = new JButton("Start");
+        submitName.setBounds(490, 320, 150, 50);
+        newGamePanel.add(submitName);
 
         canvasFrame.add(newGamePanel);
     }

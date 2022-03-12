@@ -7,6 +7,9 @@ import java.io.IOException;
 
 public class GameWindow implements KeyListener, ActionListener {
 
+    //Username
+    String username;
+
     //Screen Dimension
     int gameWidth = 1280;
     int gameHeight = 720;
@@ -128,10 +131,12 @@ public class GameWindow implements KeyListener, ActionListener {
 
         nameInput = new JTextField();
         nameInput.setBounds(420, 250, 300, 50);
+        nameInput.setHorizontalAlignment(JLabel.CENTER);
         newGamePanel.add(nameInput);
 
         submitName = new JButton("Start");
         submitName.setBounds(490, 320, 150, 50);
+        submitName.addActionListener(this);
         newGamePanel.add(submitName);
 
         canvasFrame.add(newGamePanel);
@@ -185,6 +190,11 @@ public class GameWindow implements KeyListener, ActionListener {
              rankingsButtonPanel.setVisible(false);
              mainMenuButtonsPanel.setVisible(true);
              System.out.println("Called");
+         }
+
+         if (event.getSource() == submitName) {
+             username = nameInput.getText();
+             System.out.println(username);
          }
 
          if (event.getSource() == exitButton) {

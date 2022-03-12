@@ -34,6 +34,7 @@ public class Rocket {
         this.scale = 1;
         this.fuel = fuel;
         this.isThrusting = false;
+        this.thrustAmount = 0.1;
         rocketTop = new  Point2D.Double(xPosition, yPosition);
         rocketShape =  initializeLanderShape(rocketTop);
         flameShape = initializeThrusterShape(rocketTop);

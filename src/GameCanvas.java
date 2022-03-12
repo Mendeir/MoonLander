@@ -6,13 +6,17 @@ import java.io.IOException;
 import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.Timer;
 
 public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     private Rocket rocket;
+    Timer timer;
     public int xPos = 80;
     public int yPos = 50;
     private double rotation = 0;
+    private final double THRUST_CONSTANT = 0.5;
+    private final double GRAVITY_CONSTANT = 0.3;
 
     //Game Conditions
     private boolean gameStarted;
@@ -26,16 +30,17 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         gameStarted = false;
 
         rocket = new Rocket(xPos,yPos,500);
-
+        timer = new Timer(100, this);
+        timer.start();
         addKeyListener(this);
         setBackground(Color.black);
         setFocusable(true);
 
     }
 
-    public void paint(Graphics graphic){
-        super.paint(graphic);
-
+    public void paintComponent(Graphics graphic){
+        super.paintComponent(graphic);
+        /*
         if (onSplashScreen) {
            splashWindow(graphic);
         }
@@ -44,12 +49,14 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
            mainMenuWindow(graphic);
         }
 
-        if (gameStarted) {
+         */
+
+        //if (gameStarted) {
             Graphics2D graphic2D = (Graphics2D)graphic;
 
             BufferedImage gameView = bufferedGame();
             graphic2D.drawImage(gameView,0,0,null);
-        }
+        //}
 
     }
 
@@ -72,8 +79,8 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             exception.printStackTrace();
         }
 
-        Graphics2D gd = (Graphics2D)g;
-        super.paint(g);
+        Graphics2D gd = (Graphics2D)graphic;
+        super.paint(graphic);
         BufferedImage gameView = bufferedGame();
         gd.drawImage(gameView,0,0,null);
 
@@ -96,6 +103,27 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         return buffed;
     }
 
+    public void updateRocketMomentum(){
+        double x_position = rocket.getHorizontalForce();
+        double y_position = rocket.getVerticalForce();
+        y_position += GRAVITY_CONSTANT;
+        if(rocket.getThrusting()){
+            double angle = 90 - Math.abs(rotation);
+            double new_y = (Math.sin(Math.toRadians(angle))) * THRUST_CONSTANT;
+            double new_x = (Math.cos(Math.toRadians(angle))) * THRUST_CONSTANT;
+            if(rotation < 0){
+                new_x = -new_x;
+            }
+            else if(rotation == 0){
+                new_x = 0;
+            }
+            x_position += new_x;
+            y_position -= new_y;
+        }
+        rocket.setHorizontalForce(x_position);
+        rocket.setVerticalForce(y_position);
+    }
+
     public void updateRocketPosition(){
         double x_movement = rocket.getHorizontalForce() /5;
         double y_movement = rocket.getVerticalForce() /5;
@@ -103,17 +131,19 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         rocket.setRocketTop(new_rocketTop);
     }
 
-    public void rocketMovement(){
-        rocket.setShape(rocket.initializeLanderShape(rocket.getRocketTop()));
-        rocket.setShape(rocket.getNewRotatedShape(rocket.getShape(),rotation));
-        repaint();
+    public void gameTimer(){
+
     }
-
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("action performed");
+        updateRocketMomentum();
+        updateRocketPosition();
+        rocket.setShape(rocket.initializeLanderShape(rocket.getRocketTop()));
+        rocket.setShape(rocket.getNewRotatedShape(rocket.getShape(),rotation));
+        rocket.setFlameShape(rocket.initializeThrusterShape(rocket.getRocketTop()));
+        rocket.setFlameShape(rocket.getNewRotatedShape(rocket.getFlameShape(),rotation,rocket.getRocketTop()));
+        repaint();
     }
 
     @Override
@@ -124,37 +154,25 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == e.VK_UP){
-
-            rocket.setFlameShape(rocket.initializeThrusterShape(rocket.getRocketTop()));
-            rocket.setFlameShape(rocket.getNewRotatedShape(rocket.getFlameShape(),rotation,rocket.getRocketTop()));
-            repaint();
             rocket.setThrusting(true);
-            System.out.println(rocket.getThrusting());
-
-
         }
 
         if(e.getKeyCode() == e.VK_LEFT){
-            System.out.println("left");
             rotation -= 1.5;
             rocket.setRotation(rotation);
-            rocketMovement();
         }
 
         if(e.getKeyCode() == e.VK_RIGHT){
-            System.out.println("right");
             rotation += 1.5;
             rocket.setRotation(rotation);
-            rocketMovement();
         }
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         if(e.getKeyCode() == e.VK_UP){
             rocket.setThrusting(false);
-            System.out.println(rocket.getThrusting());
-            repaint();
         }
     }
 

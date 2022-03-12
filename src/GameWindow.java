@@ -38,7 +38,6 @@ public class GameWindow implements KeyListener, ActionListener {
         canvasFrame.setVisible(true);
         canvasFrame.setLocationRelativeTo(null);
 
-        //Main Menu Buttons
         createMainMenuButtons();
 
 
@@ -49,33 +48,64 @@ public class GameWindow implements KeyListener, ActionListener {
     public void createMainMenuButtons() {
         mainMenuButtonsPanel = new JPanel();
         mainMenuButtonsPanel.setBounds((gameWidth - 400) / 2, 300, 400, 300);
-        mainMenuButtonsPanel.setBackground(Color.BLUE);
         mainMenuButtonsPanel.setVisible(false);
 
         newGameButton = new JButton("New Game");
-        newGameButton.setBounds(0, 0, 400, 75);
+        newGameButton.setBounds(0, 0, 400, 60);
+        newGameButton.addActionListener(this);
+        mainMenuButtonsPanel.add(newGameButton);
 
         settingButton = new JButton("Settings");
-        settingButton.setBounds(0, 75, 400, 75);
+        settingButton.setBounds(0, 75, 400, 60);
+        mainMenuButtonsPanel.add(settingButton);
 
         rankingButton = new JButton("Rankings");
-        rankingButton.setBounds(0, 150, 400, 75);
+        rankingButton.setBounds(0, 150, 400, 60);
+        mainMenuButtonsPanel.add(rankingButton);
 
         exitButton = new JButton("Exit");
-        exitButton.setBounds(0, 225, 400, 75);
-
-        mainMenuButtonsPanel.setLayout(null);
-        mainMenuButtonsPanel.add(newGameButton);
-        mainMenuButtonsPanel.add(settingButton);
-        mainMenuButtonsPanel.add(rankingButton);
+        exitButton.setBounds(0, 225, 400, 60);
         mainMenuButtonsPanel.add(exitButton);
 
+        mainMenuButtonsPanel.setLayout(null);
+        mainMenuButtonsPanel.setOpaque(false);
 
         canvasFrame.add(mainMenuButtonsPanel);
     }
 
+    public void createNewGameButtons() {
+
+    }
+
+    public void createSettingButtons() {
+
+    }
+
+    public void createRankingButton() {
+
+    }
+
+
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent event) {
+         if (event.getSource() == newGameButton) {
+
+         }
+
+         if (event.getSource() == settingButton) {
+
+         }
+
+         if (event.getSource() == rankingButton) {
+
+         }
+
+         if (event.getSource() == exitButton) {
+             System.out.println("Exit Button");
+            System.exit(0);
+         }
+
+
         System.out.println("Action Performed");
     }
 

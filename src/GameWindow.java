@@ -54,10 +54,13 @@ public class GameWindow implements KeyListener, ActionListener {
 
         newGameButton = new JButton("New Game");
         newGameButton.setBounds(0, 0, 400, 75);
+
         settingButton = new JButton("Settings");
         settingButton.setBounds(0, 75, 400, 75);
+
         rankingButton = new JButton("Rankings");
         rankingButton.setBounds(0, 150, 400, 75);
+
         exitButton = new JButton("Exit");
         exitButton.setBounds(0, 225, 400, 75);
 

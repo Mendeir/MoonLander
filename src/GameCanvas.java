@@ -7,6 +7,7 @@ import javax.swing.*;
 public class GameCanvas extends Canvas implements KeyListener, ActionListener {
 
     Rocket rocket;
+    Terrain terrain = new Terrain();
 
     GameCanvas(){
 
@@ -23,6 +24,8 @@ public class GameCanvas extends Canvas implements KeyListener, ActionListener {
         super.paint(g);
         BufferedImage gameView = bufferedGame();
         gd.drawImage(gameView,0,0,null);
+
+        terrain.draw(g);
     }
 
     public BufferedImage bufferedGame(){

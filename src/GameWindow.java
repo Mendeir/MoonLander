@@ -34,6 +34,10 @@ public class GameWindow implements KeyListener, ActionListener {
     JButton rankingButton;
     JButton exitButton;
     JButton mainMenuBackButton;
+    JButton submitName;
+
+    //JTextField
+    JTextField nameInput;
 
     //Fonts
     Font gameFont;
@@ -120,8 +124,13 @@ public class GameWindow implements KeyListener, ActionListener {
         namePromptLabel.setBounds(450, 200, 300, 50);
         namePromptLabel.setFont(gameFont);
         namePromptLabel.setForeground(Color.white);
-
         newGamePanel.add(namePromptLabel);
+
+        nameInput = new JTextField();
+        nameInput.setBounds(420, 250, 300, 50);
+        newGamePanel.add(nameInput);
+
+
 
         canvasFrame.add(newGamePanel);
     }

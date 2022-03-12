@@ -28,6 +28,7 @@ public class GameWindow implements KeyListener, ActionListener {
     JButton settingButton;
     JButton rankingButton;
     JButton exitButton;
+    JButton mainMenuBackButton;
 
     public GameWindow() {
         canvas = new GameCanvas();
@@ -42,11 +43,16 @@ public class GameWindow implements KeyListener, ActionListener {
         canvasFrame.setLocationRelativeTo(null);
 
         createMainMenuButtons();
+        createNewGameButtons();
         createSettingButtons();
         createRankingButton();
 
         canvas.addKeyListener(this);
         canvasFrame.add(canvas);
+    }
+
+    public void createMainMenuBackButton() {
+
     }
 
     public void createMainMenuButtons() {
@@ -86,7 +92,7 @@ public class GameWindow implements KeyListener, ActionListener {
         newGamePanel.setBackground(new Color(0, 0, 0, (float) 0.7));
         newGamePanel.setVisible(false);
 
-        canvasFrame.add(newGameButton);
+        canvasFrame.add(newGamePanel);
     }
 
     public void createSettingButtons() {
@@ -112,6 +118,7 @@ public class GameWindow implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent event) {
          if (event.getSource() == newGameButton) {
              mainMenuButtonsPanel.setVisible(false);
+             newGamePanel.setVisible(true);
          }
 
          if (event.getSource() == settingButton) {
@@ -146,7 +153,6 @@ public class GameWindow implements KeyListener, ActionListener {
                 canvas.setOnSplashScreen(false);
                 canvas.setOnMainMenu(true);
                 mainMenuButtonsPanel.setVisible(true);
-                System.out.println("Press F");
             }
 
             canvas.repaint();

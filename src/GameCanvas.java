@@ -21,6 +21,8 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     Terrain terrain = new Terrain();
 
+
+
     //Game Conditions
     private boolean gameStarted;
     private boolean onSplashScreen;
@@ -33,8 +35,9 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         gameStarted = false;
 
         rocket = new Rocket(xPos,yPos,500);
-        timer = new Timer(100, this);
-        timer.start();
+
+
+
         addKeyListener(this);
         setBackground(Color.black);
         setFocusable(true);
@@ -43,7 +46,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     public void paintComponent(Graphics graphic){
         super.paintComponent(graphic);
-        /*
+
         if (onSplashScreen) {
            splashWindow(graphic);
         }
@@ -52,14 +55,19 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
            mainMenuWindow(graphic);
         }
 
-         */
 
-        //if (gameStarted) {
+        if (gameStarted) {
             Graphics2D graphic2D = (Graphics2D)graphic;
 
             BufferedImage gameView = bufferedGame();
+
+            if (gameStarted) {
+                timer = new Timer(100, this);
+                timer.start();
+            }
+
             graphic2D.drawImage(gameView,0,0,null);
-        //}
+        }
 
     }
 
@@ -192,5 +200,13 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     public void setOnMainMenu(boolean onMainMenu) {
         this.onMainMenu = onMainMenu;
+    }
+
+    public boolean isGameStarted() {
+        return gameStarted;
+    }
+
+    public void setGameStarted(boolean gameStarted) {
+        this.gameStarted = gameStarted;
     }
 }

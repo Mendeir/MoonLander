@@ -2,6 +2,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 
 public class GameWindow implements KeyListener, ActionListener {
 
@@ -33,8 +35,21 @@ public class GameWindow implements KeyListener, ActionListener {
     JButton exitButton;
     JButton mainMenuBackButton;
 
+    //Fonts
+    Font gameFont;
+
     public GameWindow() {
         canvas = new GameCanvas();
+
+        try {
+            gameFont = Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")).deriveFont(30f);
+            GraphicsEnvironment graphicEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            graphicEnvironment.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     public void createAndShowCanvas() {
@@ -102,7 +117,8 @@ public class GameWindow implements KeyListener, ActionListener {
         newGamePanel.setVisible(false);
 
         namePromptLabel = new JLabel("Enter your name");
-        namePromptLabel.setBounds((gameWidth - 300) / 2, 50, 300, 50);
+        namePromptLabel.setBounds(450, 200, 300, 50);
+        namePromptLabel.setFont(gameFont);
         namePromptLabel.setForeground(Color.white);
 
         newGamePanel.add(namePromptLabel);

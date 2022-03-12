@@ -155,7 +155,7 @@ public class GameWindow implements KeyListener, ActionListener {
         settingButtonPanel.setBackground(new Color(0, 0, 0, (float) 0.7));
         settingButtonPanel.setLayout(null);
         settingButtonPanel.setVisible(false);
-
+        System.out.println("testing");
         canvasFrame.add(settingButtonPanel);
     }
 

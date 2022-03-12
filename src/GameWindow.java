@@ -20,8 +20,8 @@ public class GameWindow implements KeyListener, ActionListener {
     JPanel splashPanel;
     JPanel mainMenuButtonsPanel;
     JPanel newGamePanel;
-    JPanel settingButtonsPanel;
-    JPanel rankingsPanel;
+    JPanel settingButtonPanel;
+    JPanel rankingsButtonPanel;
 
     //Main Menu Buttons
     JButton newGameButton;
@@ -43,7 +43,7 @@ public class GameWindow implements KeyListener, ActionListener {
 
         createMainMenuButtons();
         createSettingButtons();
-
+        createRankingButton();
 
         canvas.addKeyListener(this);
         canvasFrame.add(canvas);
@@ -85,16 +85,21 @@ public class GameWindow implements KeyListener, ActionListener {
     }
 
     public void createSettingButtons() {
-        settingButtonsPanel = new JPanel();
-        settingButtonsPanel.setBounds((gameWidth - 1100) / 2, 40, 1100, 600);
-        settingButtonsPanel.setBackground(new Color(0, 0, 0, (float) 0.7);
-        settingButtonsPanel.setVisible(false);
+        settingButtonPanel = new JPanel();
+        settingButtonPanel.setBounds((gameWidth - 1100) / 2, 40, 1100, 600);
+        settingButtonPanel.setBackground(new Color(0, 0, 0, (float) 0.7));
+        settingButtonPanel.setVisible(false);
 
-        canvasFrame.add(settingButtonsPanel);
+        canvasFrame.add(settingButtonPanel);
     }
 
     public void createRankingButton() {
+        rankingsButtonPanel = new JPanel();
+        rankingsButtonPanel.setBounds((gameWidth - 1100) / 2, 40, 1100, 600);
+        rankingsButtonPanel.setBackground(new Color(0, 0, 0, (float) 0.7));
+        rankingsButtonPanel.setVisible(false);
 
+        canvasFrame.add(rankingsButtonPanel);
     }
 
 
@@ -106,12 +111,13 @@ public class GameWindow implements KeyListener, ActionListener {
 
          if (event.getSource() == settingButton) {
              mainMenuButtonsPanel.setVisible(false);
-             settingButtonsPanel.setVisible(true);
+             settingButtonPanel.setVisible(true);
 
          }
 
          if (event.getSource() == rankingButton) {
              mainMenuButtonsPanel.setVisible(false);
+             rankingsButtonPanel.setVisible(true);
          }
 
          if (event.getSource() == exitButton) {

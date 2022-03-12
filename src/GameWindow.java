@@ -10,7 +10,6 @@ public class GameWindow {
         frame.setBounds(350,40,700,600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
         GameCanvas canvas = new GameCanvas();
         frame.add(canvas);
     }

@@ -53,7 +53,8 @@ public class GameWindow implements KeyListener, ActionListener {
 
     public void createMainMenuBackButton() {
         mainMenuBackButton = new JButton ("Back");
-        mainMenuBackButton.setBounds(0, 0, 250, 250);
+        mainMenuBackButton.setBounds(0, 0, 150, 50);
+        mainMenuBackButton.addActionListener(this);
     }
 
     public void createMainMenuButtons() {
@@ -91,6 +92,7 @@ public class GameWindow implements KeyListener, ActionListener {
         newGamePanel = new JPanel();
         newGamePanel.setBounds((gameWidth - 1100) / 2, 40, 1100, 600);
         newGamePanel.setBackground(new Color(0, 0, 0, (float) 0.7));
+        newGamePanel.setLayout(null);
         newGamePanel.setVisible(false);
 
         createMainMenuBackButton();
@@ -133,6 +135,13 @@ public class GameWindow implements KeyListener, ActionListener {
          if (event.getSource() == rankingButton) {
              mainMenuButtonsPanel.setVisible(false);
              rankingsButtonPanel.setVisible(true);
+         }
+
+         if (event.getSource() == mainMenuBackButton) {
+             newGamePanel.setVisible(false);
+             settingButtonPanel.setVisible(false);
+             rankingsButtonPanel.setVisible(false);
+             mainMenuButtonsPanel.setVisible(true);
          }
 
          if (event.getSource() == exitButton) {

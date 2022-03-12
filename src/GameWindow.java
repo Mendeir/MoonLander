@@ -55,6 +55,7 @@ public class GameWindow implements KeyListener, ActionListener {
         mainMenuBackButton = new JButton ("Back");
         mainMenuBackButton.setBounds(0, 0, 150, 50);
         mainMenuBackButton.addActionListener(this);
+        mainMenuBackButton.setVisible(true);
     }
 
     public void createMainMenuButtons() {
@@ -82,6 +83,8 @@ public class GameWindow implements KeyListener, ActionListener {
         exitButton.addActionListener(this);
         mainMenuButtonsPanel.add(exitButton);
 
+        createMainMenuBackButton();
+
         mainMenuButtonsPanel.setLayout(null);
         mainMenuButtonsPanel.setOpaque(false);
 
@@ -95,8 +98,6 @@ public class GameWindow implements KeyListener, ActionListener {
         newGamePanel.setLayout(null);
         newGamePanel.setVisible(false);
 
-        createMainMenuBackButton();
-        newGamePanel.add(mainMenuBackButton);
         canvasFrame.add(newGamePanel);
     }
 
@@ -104,6 +105,7 @@ public class GameWindow implements KeyListener, ActionListener {
         settingButtonPanel = new JPanel();
         settingButtonPanel.setBounds((gameWidth - 1100) / 2, 40, 1100, 600);
         settingButtonPanel.setBackground(new Color(0, 0, 0, (float) 0.7));
+        settingButtonPanel.setLayout(null);
         settingButtonPanel.setVisible(false);
 
         canvasFrame.add(settingButtonPanel);
@@ -113,6 +115,7 @@ public class GameWindow implements KeyListener, ActionListener {
         rankingsButtonPanel = new JPanel();
         rankingsButtonPanel.setBounds((gameWidth - 1100) / 2, 40, 1100, 600);
         rankingsButtonPanel.setBackground(new Color(0, 0, 0, (float) 0.7));
+        rankingsButtonPanel.setLayout(null);
         rankingsButtonPanel.setVisible(false);
 
         canvasFrame.add(rankingsButtonPanel);
@@ -123,17 +126,20 @@ public class GameWindow implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent event) {
          if (event.getSource() == newGameButton) {
              mainMenuButtonsPanel.setVisible(false);
+             newGamePanel.add(mainMenuBackButton);
              newGamePanel.setVisible(true);
          }
 
          if (event.getSource() == settingButton) {
              mainMenuButtonsPanel.setVisible(false);
+             settingButtonPanel.add(mainMenuBackButton);
              settingButtonPanel.setVisible(true);
 
          }
 
          if (event.getSource() == rankingButton) {
              mainMenuButtonsPanel.setVisible(false);
+             rankingsButtonPanel.add(mainMenuBackButton);
              rankingsButtonPanel.setVisible(true);
          }
 
@@ -142,6 +148,7 @@ public class GameWindow implements KeyListener, ActionListener {
              settingButtonPanel.setVisible(false);
              rankingsButtonPanel.setVisible(false);
              mainMenuButtonsPanel.setVisible(true);
+             System.out.println("Called");
          }
 
          if (event.getSource() == exitButton) {
@@ -165,9 +172,8 @@ public class GameWindow implements KeyListener, ActionListener {
                 canvas.setOnSplashScreen(false);
                 canvas.setOnMainMenu(true);
                 mainMenuButtonsPanel.setVisible(true);
+                canvas.repaint();
             }
-
-            canvas.repaint();
         }
     }
 

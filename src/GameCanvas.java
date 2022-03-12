@@ -2,17 +2,28 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.util.*;
+import java.io.IOException;
+import java.util.Objects;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class GameCanvas extends Canvas implements KeyListener, ActionListener {
+public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
-    Rocket rocket;
+    private Rocket rocket;
     public int xPos = 80;
     public int yPos = 50;
     private double rotation = 0;
 
-    GameCanvas(){
+    //Game Conditions
+    private boolean gameStarted;
+    private boolean onSplashScreen;
+    private boolean onMainMenu;
+
+    private JPanel mainMenuPanel;
+
+    public GameCanvas(){
+        onSplashScreen = true;
+        gameStarted = false;
 
         rocket = new Rocket(xPos,yPos,500);
 
@@ -22,7 +33,44 @@ public class GameCanvas extends Canvas implements KeyListener, ActionListener {
 
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics graphic){
+        super.paint(graphic);
+
+        if (onSplashScreen) {
+           splashWindow(graphic);
+        }
+
+        if (onMainMenu) {
+           mainMenuWindow(graphic);
+        }
+
+        if (gameStarted) {
+            Graphics2D graphic2D = (Graphics2D)graphic;
+
+            BufferedImage gameView = bufferedGame();
+            graphic2D.drawImage(gameView,0,0,null);
+        }
+
+    }
+
+    public void splashWindow(Graphics graphic) {
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(Objects.requireNonNull(GameCanvas.class.getResource("/assets/images/SplashScreen720p.jpg")));
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
+        graphic.drawImage(image, 0, 0, this);
+    }
+
+    public void mainMenuWindow(Graphics graphic) {
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(Objects.requireNonNull(GameCanvas.class.getResource("/assets/images/TitleScreen720p.jpg")));
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
 
         Graphics2D gd = (Graphics2D)g;
         super.paint(g);
@@ -66,7 +114,6 @@ public class GameCanvas extends Canvas implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("action performed");
-
     }
 
     @Override
@@ -109,5 +156,23 @@ public class GameCanvas extends Canvas implements KeyListener, ActionListener {
             System.out.println(rocket.getThrusting());
             repaint();
         }
+    }
+
+    //Setter and Getter
+
+    public boolean isOnSplashScreen() {
+        return onSplashScreen;
+    }
+
+    public void setOnSplashScreen(boolean onSplashScreen) {
+        this.onSplashScreen = onSplashScreen;
+    }
+
+    public boolean isOnMainMenu() {
+        return onMainMenu;
+    }
+
+    public void setOnMainMenu(boolean onMainMenu) {
+        this.onMainMenu = onMainMenu;
     }
 }

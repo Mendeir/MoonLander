@@ -32,6 +32,12 @@ public class GameWindow implements KeyListener, ActionListener {
     //JLabel
     JLabel namePromptLabel;
     JLabel levelSelectLabel;
+    JLabel settingDifficultyLabel;
+    JLabel rankingLabel;
+    JLabel rankingLevelOneLabel;
+    JLabel rankingLevelTwoLabel;
+    JLabel rankingLevelThreeLabel;
+    JLabel settingSoundsLabel;
 
     //Main Menu Buttons
     JButton newGameButton;
@@ -44,12 +50,17 @@ public class GameWindow implements KeyListener, ActionListener {
     JButton levelTwoButton;
     JButton levelThreeButton;
     JButton levelSelectBack;
+    JButton settingEasyButton;
+    JButton settingHardButton;
 
     //JTextField
     JTextField nameInput;
 
     //Fonts
     Font gameFont;
+
+    //JSlider
+    JSlider soundSlider;
 
     public GameWindow() {
         canvas = new GameCanvas();
@@ -155,7 +166,40 @@ public class GameWindow implements KeyListener, ActionListener {
         settingButtonPanel.setBackground(new Color(0, 0, 0, (float) 0.7));
         settingButtonPanel.setLayout(null);
         settingButtonPanel.setVisible(false);
-        System.out.println("testing");
+
+        settingDifficultyLabel = new JLabel("Difficulty");
+        settingDifficultyLabel.setBounds(475, 300, 200, 50);
+        settingDifficultyLabel.setFont(gameFont);
+        settingDifficultyLabel.setForeground(Color.WHITE);
+        settingButtonPanel.add(settingDifficultyLabel);
+
+        settingEasyButton = new JButton("Easy");
+        settingEasyButton.setBounds(450, 380, 200, 50);
+        settingEasyButton.addActionListener(this);
+        settingButtonPanel.add(settingEasyButton);
+
+        settingHardButton = new JButton("Hard");
+        settingHardButton.setBounds(450, 460, 200, 50);
+        settingHardButton.addActionListener(this);
+        settingButtonPanel.add(settingHardButton);
+
+        settingSoundsLabel = new JLabel("Sounds");
+        settingSoundsLabel.setBounds(490, 100, 200, 50);
+        settingSoundsLabel.setFont(gameFont);
+        settingSoundsLabel.setForeground(Color.WHITE);
+        settingButtonPanel.add(settingSoundsLabel);
+
+        soundSlider = new JSlider();
+        soundSlider.setMinimum(0);
+        soundSlider.setMaximum(100);
+        soundSlider.setBounds(200, 180, 700, 70);
+        soundSlider.setPaintTicks(true);
+        soundSlider.setPaintLabels(true);
+        soundSlider.setMajorTickSpacing(50);
+        soundSlider.setMinorTickSpacing(5);
+        settingButtonPanel.add(soundSlider);
+
+
         canvasFrame.add(settingButtonPanel);
     }
 
@@ -165,6 +209,30 @@ public class GameWindow implements KeyListener, ActionListener {
         rankingsButtonPanel.setBackground(new Color(0, 0, 0, (float) 0.7));
         rankingsButtonPanel.setLayout(null);
         rankingsButtonPanel.setVisible(false);
+
+        rankingLabel = new JLabel("Ranking");
+        rankingLabel.setBounds(470, 100, 200, 50);
+        rankingLabel.setFont(gameFont);
+        rankingLabel.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rankingLabel);
+
+        rankingLevelOneLabel = new JLabel("Level 1");
+        rankingLevelOneLabel.setBounds(190, 180, 200, 50);
+        rankingLevelOneLabel.setFont(gameFont);
+        rankingLevelOneLabel.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rankingLevelOneLabel);
+
+        rankingLevelTwoLabel = new JLabel("Level 2");
+        rankingLevelTwoLabel.setBounds(480, 180, 200, 50);
+        rankingLevelTwoLabel.setFont(gameFont);
+        rankingLevelTwoLabel.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rankingLevelTwoLabel);
+
+        rankingLevelThreeLabel = new JLabel("Level 3");
+        rankingLevelThreeLabel.setBounds(770, 180, 200, 50);
+        rankingLevelThreeLabel.setFont(gameFont);
+        rankingLevelThreeLabel.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rankingLevelThreeLabel);
 
         canvasFrame.add(rankingsButtonPanel);
     }
@@ -219,6 +287,14 @@ public class GameWindow implements KeyListener, ActionListener {
              settingButtonPanel.add(mainMenuBackButton);
              settingButtonPanel.setVisible(true);
 
+         }
+
+          if (event.getSource() == settingEasyButton) {
+             System.out.println("Easy");
+          }
+
+         if (event.getSource() == settingHardButton) {
+             System.out.println("Hard");
          }
 
          if (event.getSource() == rankingButton) {

@@ -2,8 +2,13 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 
 public class GameWindow implements KeyListener, ActionListener {
+
+    //Username
+    String username;
 
     //Screen Dimension
     int gameWidth = 1280;
@@ -32,9 +37,26 @@ public class GameWindow implements KeyListener, ActionListener {
     JButton rankingButton;
     JButton exitButton;
     JButton mainMenuBackButton;
+    JButton submitName;
+
+    //JTextField
+    JTextField nameInput;
+
+    //Fonts
+    Font gameFont;
 
     public GameWindow() {
         canvas = new GameCanvas();
+
+        try {
+            gameFont = Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")).deriveFont(30f);
+            GraphicsEnvironment graphicEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            graphicEnvironment.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     public void createAndShowCanvas() {
@@ -102,10 +124,20 @@ public class GameWindow implements KeyListener, ActionListener {
         newGamePanel.setVisible(false);
 
         namePromptLabel = new JLabel("Enter your name");
-        namePromptLabel.setBounds((gameWidth - 300) / 2, 50, 300, 50);
+        namePromptLabel.setBounds(450, 200, 300, 50);
+        namePromptLabel.setFont(gameFont);
         namePromptLabel.setForeground(Color.white);
-
         newGamePanel.add(namePromptLabel);
+
+        nameInput = new JTextField();
+        nameInput.setBounds(420, 250, 300, 50);
+        nameInput.setHorizontalAlignment(JLabel.CENTER);
+        newGamePanel.add(nameInput);
+
+        submitName = new JButton("Start");
+        submitName.setBounds(490, 320, 150, 50);
+        submitName.addActionListener(this);
+        newGamePanel.add(submitName);
 
         canvasFrame.add(newGamePanel);
     }
@@ -158,6 +190,11 @@ public class GameWindow implements KeyListener, ActionListener {
              rankingsButtonPanel.setVisible(false);
              mainMenuButtonsPanel.setVisible(true);
              System.out.println("Called");
+         }
+
+         if (event.getSource() == submitName) {
+             username = nameInput.getText();
+             System.out.println(username);
          }
 
          if (event.getSource() == exitButton) {

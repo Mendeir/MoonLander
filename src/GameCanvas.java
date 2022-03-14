@@ -35,6 +35,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         gameStarted = false;
 
         rocket = new Rocket(xPos,yPos,500);
+        timer = new Timer(100, this);
 
 
 
@@ -62,13 +63,12 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             BufferedImage gameView = bufferedGame();
 
             if (gameStarted) {
-                timer = new Timer(100, this);
                 timer.start();
             }
-
             graphic2D.drawImage(gameView,0,0,null);
-        }
+            terrain.draw(graphic);
 
+        }
     }
 
     public void splashWindow(Graphics graphic) {
@@ -142,7 +142,6 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     public void gameTimer(){
 
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         updateRocketMomentum();

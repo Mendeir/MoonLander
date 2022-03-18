@@ -11,34 +11,34 @@ import javax.swing.Timer;
 public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     private Rocket rocket;
-
     Timer timer;
-    public int xPos = 80;
-    public int yPos = 50;
+
+    private int time,time_min,time_ten, time_sec;
+    private int xPos = 10;
+    private int yPos = 50;
+    private int fuel = 1000;
+    private int delay = 100;
+    private boolean landed = false;
     private double rotation = 0;
+
     private final double THRUST_CONSTANT = 0.5;
     private final double GRAVITY_CONSTANT = 0.3;
 
     Terrain terrain = new Terrain();
 
-
-
     //Game Conditions
     private boolean gameStarted;
     private boolean onSplashScreen;
     private boolean onMainMenu;
-
     private JPanel mainMenuPanel;
 
     public GameCanvas(){
+        time = 0;
         onSplashScreen = true;
         gameStarted = false;
-
-        rocket = new Rocket(xPos,yPos,500);
-        timer = new Timer(100, this);
-
-
-
+        rocket = new Rocket(xPos,yPos,fuel);
+        timer = new Timer(delay, this);
+        timer.setInitialDelay(1000);
         addKeyListener(this);
         setBackground(Color.black);
         setFocusable(true);
@@ -107,7 +107,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         }
 
         g.draw(rocket.getFlameShape());
-
+        paintDetails(g);
         return buffed;
     }
 
@@ -127,6 +127,8 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             }
             x_position += new_x;
             y_position -= new_y;
+
+            fuel--;
         }
         rocket.setHorizontalForce(x_position);
         rocket.setVerticalForce(y_position);
@@ -139,13 +141,24 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         rocket.setRocketTop(new_rocketTop);
     }
 
-    public void gameTimer(){
-
+    public void paintDetails(Graphics2D g2){
+        Font font = new Font("Monospaced", Font.PLAIN,14);
+        g2.setFont(font);
+        g2.drawString("Time: " + time_min + ":" + time_ten + time_sec,1000,40);
+        g2.drawString("Fuel: " + fuel,1000,90);
     }
+
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        updateRocketMomentum();
-        updateRocketPosition();
+        timeRocket();
+        if(!landed && time % 50 == 0){
+            updateRocketMomentum();
+            updateRocketPosition();
+        }
+
+
         rocket.setShape(rocket.initializeLanderShape(rocket.getRocketTop()));
         rocket.setShape(rocket.getNewRotatedShape(rocket.getShape(),rotation));
         rocket.setFlameShape(rocket.initializeThrusterShape(rocket.getRocketTop()));
@@ -156,6 +169,21 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     @Override
     public void keyTyped(KeyEvent e) {
 
+    }
+
+    public void timeRocket(){
+        time += delay;
+        time_sec += time / 1000;
+        if(time >= 1000){ time = 0; }
+
+        if(time_sec > 9){
+            time_sec = 0;
+            time_ten += 1;
+        }
+        if(time_ten > 5){
+            time_ten = 0;
+            time_min += 1;
+        }
     }
 
     @Override
@@ -173,6 +201,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             rotation += 1.5;
             rocket.setRotation(rotation);
         }
+
 
     }
 

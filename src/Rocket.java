@@ -29,7 +29,7 @@ public class Rocket {
     //Rocket Initialization
     public Rocket (int xPosition, int yPosition, int fuel){
         this.horizontalForce = 10;
-        this.verticalForce = 0;
+        this.verticalForce = 10;
         this.rotation = 0;
         this.scale = 1;
         this.fuel = fuel;
@@ -109,7 +109,6 @@ public class Rocket {
         }
         return thruster_flame;
     }
-
 
     // setters and getters
     public void setShape(Shape new_lander_shape){ rocketShape = new_lander_shape; }

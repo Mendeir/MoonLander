@@ -7,8 +7,6 @@ import java.util.Random;
 
 public class Terrain
 {
-    int stars = 100;
-    boolean fix =false;
      int[] terrainX_axis = {-100 ,30 ,40 ,100,140,160,180,200,220,230,300,310,330,350,
              360,400,410,435,460,465,500,545,560,575,580,600,640,665,710,750,780,800,
              830,860,890,910,960,1010,1060,1110,1160,1210,1240,1280,1300,0};
@@ -99,6 +97,25 @@ public class Terrain
         g2.drawLine(1200, 350, 1200, 350);
         g2.drawLine(1250, 480, 1250, 480);
         g2.drawLine(1250, 350, 1250, 350);
+    }
+
+    public void levelOneLander(Graphics g){
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.green);
+        g2.setFont(new Font("Courier",Font.BOLD,10));
+        g2.drawString("Land Here",238,510);
+    }
+    public void levelTwoLander(Graphics g){
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.green);
+        g2.setFont(new Font("Courier",Font.BOLD,12));
+        g2.drawString("2x",646,460);
+    }
+    public void levelThreeLander(Graphics g){
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.green);
+        g2.setFont(new Font("Courier",Font.BOLD,12));
+        g2.drawString("4x",1180,660);
     }
 
 }

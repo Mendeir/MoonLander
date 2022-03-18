@@ -9,6 +9,7 @@ public class GameWindow implements KeyListener, ActionListener {
 
     //Username
     String username;
+    int level;
 
     //Screen Dimension
     int gameWidth = 1280;
@@ -16,6 +17,7 @@ public class GameWindow implements KeyListener, ActionListener {
 
     //Canvas
     GameCanvas canvas;
+    Graphics graphics;
 
     //JFrames
     JFrame canvasFrame;
@@ -250,14 +252,17 @@ public class GameWindow implements KeyListener, ActionListener {
              levelSelectPanel.setVisible(false);
              canvas.setOnSplashScreen(false);
              canvas.setGameStarted(true);
+             level = canvas.level++;
              canvas.repaint();
          }
 
          if (event.getSource() == levelTwoButton) {
+             level = canvas.level + 2;
              System.out.println("Level 2");
          }
 
          if (event.getSource() == levelThreeButton) {
+             level = canvas.level + 3;
              System.out.println("Level 3");
          }
 

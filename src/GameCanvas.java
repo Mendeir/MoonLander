@@ -9,7 +9,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 
 public class GameCanvas extends JPanel implements KeyListener, ActionListener{
-    
+
     private Rocket rocket;
     Timer timer;
 

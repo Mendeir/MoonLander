@@ -207,21 +207,37 @@ public class GameWindow implements KeyListener, ActionListener {
         levelSelectPanel.add(levelSelectLabel);
 
         levelOneButton = new JButton("Level 1");
+        levelOneButton.setBorderPainted(false);
+        levelOneButton.setContentAreaFilled(false);
+        levelOneButton.setFont(gameFont);
+        levelOneButton.setForeground(Color.white);
         levelOneButton.setBounds(460, 260, 200, 50);
         levelOneButton.addActionListener(this);
         levelSelectPanel.add(levelOneButton);
 
         levelTwoButton = new JButton("Level 2");
+        levelTwoButton.setBorderPainted(false);
+        levelTwoButton.setContentAreaFilled(false);
+        levelTwoButton.setFont(gameFont);
+        levelTwoButton.setForeground(Color.white);
         levelTwoButton.setBounds(460, 320, 200, 50);
         levelTwoButton.addActionListener(this);
         levelSelectPanel.add(levelTwoButton);
 
         levelThreeButton = new JButton("Level 3");
+        levelThreeButton.setBorderPainted(false);
+        levelThreeButton.setContentAreaFilled(false);
+        levelThreeButton.setFont(gameFont);
+        levelThreeButton.setForeground(Color.white);
         levelThreeButton.setBounds(460, 380, 200, 50);
         levelThreeButton.addActionListener(this);
         levelSelectPanel.add(levelThreeButton);
 
         levelSelectBack = new JButton("Back");
+        levelSelectBack.setBorderPainted(false);
+        levelSelectBack.setContentAreaFilled(false);
+        levelSelectBack.setFont(gameFont);
+        levelSelectBack.setForeground(Color.white);
         levelSelectBack.setBounds(460, 440, 200, 50);
         levelSelectBack.addActionListener(this);
         levelSelectPanel.add(levelSelectBack);

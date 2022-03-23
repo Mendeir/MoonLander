@@ -87,6 +87,7 @@ public class GameWindow implements KeyListener, ActionListener {
         mainMenuBackButton = new JButton ("Back");
         mainMenuBackButton.setBounds(0, 0, 150, 50);
         mainMenuBackButton.addActionListener(this);
+        mainMenuBackButton.setOpaque(true);
         mainMenuBackButton.setVisible(true);
     }
 
@@ -96,6 +97,10 @@ public class GameWindow implements KeyListener, ActionListener {
         mainMenuButtonsPanel.setVisible(false);
 
         newGameButton = new JButton("New Game");
+        newGameButton.setBorderPainted(false);
+        newGameButton.setContentAreaFilled(false);
+        newGameButton.setFont(gameFont);
+        newGameButton.setForeground(Color.white);
         newGameButton.setBounds(0, 0, 400, 60);
         newGameButton.addActionListener(this);
         mainMenuButtonsPanel.add(newGameButton);

@@ -25,6 +25,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     private final double GRAVITY_CONSTANT = 0.3;
 
     Terrain terrain = new Terrain();
+    public int level = 0;
 
     //Game Conditions
     private boolean gameStarted;
@@ -67,7 +68,18 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             }
             graphic2D.drawImage(gameView,0,0,null);
             terrain.draw(graphic);
+        }
 
+        if(level == 1){
+            terrain.levelOneLander(graphic);
+        }
+
+        if(level == 2){
+            terrain.levelTwoLander(graphic);
+        }
+
+        if(level == 3){
+            terrain.levelThreeLander(graphic);
         }
     }
 
@@ -147,8 +159,6 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         g2.drawString("Time: " + time_min + ":" + time_ten + time_sec,1000,40);
         g2.drawString("Fuel: " + fuel,1000,90);
     }
-
-
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -91,7 +91,6 @@ public class GameWindow implements KeyListener, ActionListener {
         mainMenuBackButton.setForeground(Color.white);
         mainMenuBackButton.setBounds(0, 0, 150, 50);
         mainMenuBackButton.addActionListener(this);
-        mainMenuBackButton.setOpaque(true);
         mainMenuBackButton.setVisible(true);
     }
 

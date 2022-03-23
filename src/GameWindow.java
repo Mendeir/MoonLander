@@ -85,6 +85,10 @@ public class GameWindow implements KeyListener, ActionListener {
 
     public void createMainMenuBackButton() {
         mainMenuBackButton = new JButton ("Back");
+        mainMenuBackButton.setBorderPainted(false);
+        mainMenuBackButton.setContentAreaFilled(false);
+        mainMenuBackButton.setFont(gameFont);
+        mainMenuBackButton.setForeground(Color.white);
         mainMenuBackButton.setBounds(0, 0, 150, 50);
         mainMenuBackButton.addActionListener(this);
         mainMenuBackButton.setOpaque(true);

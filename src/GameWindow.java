@@ -163,6 +163,10 @@ public class GameWindow implements KeyListener, ActionListener {
         newGamePanel.add(nameInput);
 
         submitName = new JButton("Start");
+        submitName.setBorderPainted(false);
+        submitName.setContentAreaFilled(false);
+        submitName.setFont(gameFont);
+        submitName.setForeground(Color.white);
         submitName.setBounds(490, 320, 150, 50);
         submitName.addActionListener(this);
         newGamePanel.add(submitName);

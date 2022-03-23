@@ -85,6 +85,10 @@ public class GameWindow implements KeyListener, ActionListener {
 
     public void createMainMenuBackButton() {
         mainMenuBackButton = new JButton ("Back");
+        mainMenuBackButton.setBorderPainted(false);
+        mainMenuBackButton.setContentAreaFilled(false);
+        mainMenuBackButton.setFont(gameFont);
+        mainMenuBackButton.setForeground(Color.white);
         mainMenuBackButton.setBounds(0, 0, 150, 50);
         mainMenuBackButton.addActionListener(this);
         mainMenuBackButton.setVisible(true);
@@ -96,21 +100,37 @@ public class GameWindow implements KeyListener, ActionListener {
         mainMenuButtonsPanel.setVisible(false);
 
         newGameButton = new JButton("New Game");
+        newGameButton.setBorderPainted(false);
+        newGameButton.setContentAreaFilled(false);
+        newGameButton.setFont(gameFont);
+        newGameButton.setForeground(Color.white);
         newGameButton.setBounds(0, 0, 400, 60);
         newGameButton.addActionListener(this);
         mainMenuButtonsPanel.add(newGameButton);
 
         settingButton = new JButton("Settings");
+        settingButton.setBorderPainted(false);
+        settingButton.setContentAreaFilled(false);
+        settingButton.setFont(gameFont);
+        settingButton.setForeground(Color.white);
         settingButton.setBounds(0, 75, 400, 60);
         settingButton.addActionListener(this);
         mainMenuButtonsPanel.add(settingButton);
 
         rankingButton = new JButton("Rankings");
+        rankingButton.setBorderPainted(false);
+        rankingButton.setContentAreaFilled(false);
+        rankingButton.setFont(gameFont);
+        rankingButton.setForeground(Color.white);
         rankingButton.setBounds(0, 150, 400, 60);
         rankingButton.addActionListener(this);
         mainMenuButtonsPanel.add(rankingButton);
 
         exitButton = new JButton("Exit");
+        exitButton.setBorderPainted(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setFont(gameFont);
+        exitButton.setForeground(Color.white);
         exitButton.setBounds(0, 225, 400, 60);
         exitButton.addActionListener(this);
         mainMenuButtonsPanel.add(exitButton);
@@ -142,6 +162,10 @@ public class GameWindow implements KeyListener, ActionListener {
         newGamePanel.add(nameInput);
 
         submitName = new JButton("Start");
+        submitName.setBorderPainted(false);
+        submitName.setContentAreaFilled(false);
+        submitName.setFont(gameFont);
+        submitName.setForeground(Color.white);
         submitName.setBounds(490, 320, 150, 50);
         submitName.addActionListener(this);
         newGamePanel.add(submitName);

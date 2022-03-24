@@ -1,5 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -7,9 +8,8 @@ import java.util.Random;
 
 public class Terrain
 {
-    int stars = 100;
-    boolean fix =false;
-
+    Rectangle2D boundingBox;
+    Rectangle2D landingPad;
 
     int[] terrainX_axis = {
              -100, 30 ,40 ,
@@ -135,6 +135,7 @@ public class Terrain
     }
 
 
+
     public void levelOneLander(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.YELLOW);
@@ -165,6 +166,14 @@ public class Terrain
 
     }
 
+    public boolean checkLandingCollision(){
+        {
+            Rectangle2D boundingBox = (Rectangle2D) rocket.getShape();
+
+            return terrain.shape().intersects(boundingBox);
+        }
+    }
+
     public int[] getTerrainX_axis() {
         return terrainX_axis;
     }
@@ -173,4 +182,7 @@ public class Terrain
         return terrainY_axis;
     }
 
+    public void setBoundingBox(Rectangle2D boundingBox) {
+        this.boundingBox = boundingBox;
+    }
 }

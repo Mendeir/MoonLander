@@ -26,7 +26,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     private final double GRAVITY_CONSTANT = 0.3;
 
     private Terrain terrain = new Terrain();
-    public int level = 0;
+    private int level;
 
     //Game Conditions
     private boolean gameStarted;
@@ -35,6 +35,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     private JPanel mainMenuPanel;
 
     public GameCanvas(){
+        level = 0;
         time = 0;
         onSplashScreen = true;
         gameStarted = false;
@@ -58,15 +59,16 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
            mainMenuWindow(graphic);
         }
 
+        if (!gameStarted)
+            timer.stop();
 
         if (gameStarted) {
             Graphics2D graphic2D = (Graphics2D)graphic;
 
             BufferedImage gameView = bufferedGame();
 
-            if (gameStarted) {
-                timer.start();
-            }
+            timer.start();
+
             graphic2D.drawImage(gameView,0,0,null);
             terrain.draw(graphic);
 
@@ -275,5 +277,9 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     public void setGameStarted(boolean gameStarted) {
         this.gameStarted = gameStarted;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

@@ -290,7 +290,7 @@ public class GameWindow implements KeyListener, ActionListener {
              levelSelectPanel.setVisible(false);
              canvas.setOnSplashScreen(false);
              canvas.setGameStarted(true);
-             canvas.level = 1;
+             canvas.setLevel(1);
              canvas.repaint();
          }
 
@@ -298,7 +298,7 @@ public class GameWindow implements KeyListener, ActionListener {
              levelSelectPanel.setVisible(false);
              canvas.setOnSplashScreen(false);
              canvas.setGameStarted(true);
-             canvas.level = 2;
+             canvas.setLevel(2);
              canvas.repaint();
              System.out.println("Level 2");
          }
@@ -307,7 +307,7 @@ public class GameWindow implements KeyListener, ActionListener {
              levelSelectPanel.setVisible(false);
              canvas.setOnSplashScreen(false);
              canvas.setGameStarted(true);
-             canvas.level = 3;
+             canvas.setLevel(3);
              System.out.println("Level 3");
          }
 
@@ -334,6 +334,14 @@ public class GameWindow implements KeyListener, ActionListener {
                 mainMenuButtonsPanel.setVisible(true);
                 canvas.repaint();
             }
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_M) {
+            canvas.setOnSplashScreen(true);
+            canvas.setGameStarted(false);
+            canvas.setLevel(0);
+            mainMenuButtonsPanel.setVisible(true);
+            canvas.repaint();
         }
     }
 

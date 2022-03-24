@@ -18,7 +18,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     private int time,time_min,time_ten, time_sec;
     private int xPos = 10;
     private int yPos = 50;
-    private int fuel = 1000;
+    private int fuel = 20;
     private int delay = 100;
     private boolean landed = false;
     private double rotation = 0;
@@ -182,6 +182,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             }else{
                 g2.drawString("Game Over",500,200);
             }
+            g2.drawString("Press m to continue...",500,300);
         }catch (FontFormatException | IOException e){
             e.printStackTrace();
         }
@@ -234,7 +235,10 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == e.VK_UP){
-            rocket.setThrusting(true);
+            if(fuel != 0)
+                rocket.setThrusting(true);
+            else
+                rocket.setThrusting(false);
         }
 
         if(e.getKeyCode() == e.VK_LEFT){

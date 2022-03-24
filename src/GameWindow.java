@@ -1,9 +1,15 @@
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.*;
 
 public class GameWindow implements KeyListener, ActionListener {
 
@@ -52,6 +58,8 @@ public class GameWindow implements KeyListener, ActionListener {
     JButton levelSelectBack;
     JButton settingEasyButton;
     JButton settingHardButton;
+    JButton settingPlayButton;
+    JButton settingMuteButton;
 
     //JTextField
     JTextField nameInput;
@@ -60,7 +68,7 @@ public class GameWindow implements KeyListener, ActionListener {
     Font gameFont;
 
     //JSlider
-    JSlider soundSlider;
+    //JSlider soundSlider;
 
     public GameWindow() {
         canvas = new GameCanvas();
@@ -69,9 +77,20 @@ public class GameWindow implements KeyListener, ActionListener {
             gameFont = Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")).deriveFont(30f);
             GraphicsEnvironment graphicEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
             graphicEnvironment.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")));
+            File file = new File("C:\\Users\\Levi\\IdeaProjects\\MoonLander\\src\\assets\\sounds\\Space-bleeps-electronic-music-loop.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
     }
@@ -189,15 +208,15 @@ public class GameWindow implements KeyListener, ActionListener {
         settingSoundsLabel.setForeground(Color.WHITE);
         settingButtonPanel.add(settingSoundsLabel);
 
-        soundSlider = new JSlider();
-        soundSlider.setMinimum(0);
-        soundSlider.setMaximum(100);
-        soundSlider.setBounds(200, 180, 700, 70);
-        soundSlider.setPaintTicks(true);
-        soundSlider.setPaintLabels(true);
-        soundSlider.setMajorTickSpacing(50);
-        soundSlider.setMinorTickSpacing(5);
-        settingButtonPanel.add(soundSlider);
+        settingPlayButton = new JButton("Play");
+        settingPlayButton.setBounds(300, 180, 200, 50);
+        settingPlayButton.addActionListener(this);
+        settingButtonPanel.add(settingPlayButton);
+
+        settingMuteButton = new JButton("Mute");
+        settingMuteButton.setBounds(600, 180, 200, 50);
+        settingMuteButton.addActionListener(this);
+        settingButtonPanel.add(settingMuteButton);
 
 
         canvasFrame.add(settingButtonPanel);
@@ -296,6 +315,15 @@ public class GameWindow implements KeyListener, ActionListener {
          if (event.getSource() == settingHardButton) {
              System.out.println("Hard");
          }
+
+        if (event.getSource() == settingPlayButton) {
+            System.out.println("Play Sounds");
+        }
+
+        if (event.getSource() == settingMuteButton) {
+           // clip.stop();
+            System.out.println("Mute Sounds");
+        }
 
          if (event.getSource() == rankingButton) {
              mainMenuButtonsPanel.setVisible(false);

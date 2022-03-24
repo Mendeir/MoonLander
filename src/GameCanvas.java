@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -68,6 +69,8 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             }
             graphic2D.drawImage(gameView,0,0,null);
             terrain.draw(graphic);
+
+
         }
 
         if(level == 1){
@@ -118,6 +121,12 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             rocket.setThrustAmount(rocket.getThrustAmount() - 0.1 );
         }
 
+        if(checkCollision()){
+            landed = true;
+            System.out.println("GameOver");
+        }
+
+
         g.draw(rocket.getFlameShape());
         paintDetails(g);
         return buffed;
@@ -160,6 +169,15 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         g2.drawString("Fuel: " + fuel,1000,90);
     }
 
+    private boolean checkCollision()
+    {
+        /* Get bounding box of lander. */
+        Rectangle2D boundingBox = rocket.getBoundingBox();
+
+        /* Check intersection with terrain. */
+        return terrain.shape().intersects(boundingBox);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         timeRocket();
@@ -167,7 +185,6 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             updateRocketMomentum();
             updateRocketPosition();
         }
-
 
         rocket.setShape(rocket.initializeLanderShape(rocket.getRocketTop()));
         rocket.setShape(rocket.getNewRotatedShape(rocket.getShape(),rotation));

@@ -1,17 +1,11 @@
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
-import java.util.Random;
 
 public class Terrain
 {
-    Rectangle2D boundingBox;
     Rectangle2D landingPad;
 
-    int[] terrainX_axis = {
+    private int[] terrainX_axis = {
              -100, 30 ,40 ,
              100,140,160,
              180,200,220,
@@ -31,7 +25,7 @@ public class Terrain
 
 
 
-    int[] terrainY_axis = {
+    private int[] terrainY_axis = {
              800, 500,570,
              570,400,450,
              445,530,540,
@@ -49,6 +43,10 @@ public class Terrain
              490,490,700,
              700
      };
+
+    Terrain(){
+        landingPad = new Rectangle2D.Double(0,0,0,0);
+    }
 
     public void draw(Graphics g)
     {
@@ -144,6 +142,8 @@ public class Terrain
 
         g2.setPaint(new Color(200,200,200));
         g2.fillRoundRect(230,490,70,10,5,5);
+
+        landingPad = new Rectangle2D.Double(230,490,70,10);
     }
     public void levelTwoLander(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
@@ -154,6 +154,7 @@ public class Terrain
         g2.setPaint(new Color(200,200,200));
         g2.fillRoundRect(640,440,25,10,5,5);
 
+        landingPad = new Rectangle2D.Double(640,440,25,10);
     }
     public void levelThreeLander(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
@@ -164,15 +165,10 @@ public class Terrain
         g2.setPaint(new Color(200,200,200));
         g2.fillRoundRect(1160,640,50,10,5,5);
 
+        landingPad = new Rectangle2D.Double(1160,640,50,10);
     }
 
-    public boolean checkLandingCollision(){
-        {
-            Rectangle2D boundingBox = (Rectangle2D) rocket.getShape();
 
-            return terrain.shape().intersects(boundingBox);
-        }
-    }
 
     public int[] getTerrainX_axis() {
         return terrainX_axis;
@@ -182,7 +178,8 @@ public class Terrain
         return terrainY_axis;
     }
 
-    public void setBoundingBox(Rectangle2D boundingBox) {
-        this.boundingBox = boundingBox;
+    public Rectangle2D getLandingPad() {
+        return landingPad;
     }
+
 }

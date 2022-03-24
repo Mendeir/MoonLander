@@ -8,48 +8,48 @@ import java.io.IOException;
 public class GameWindow implements KeyListener, ActionListener {
 
     //Username
-    String username;
+    private String username;
 
     //Screen Dimension
-    int gameWidth = 1280;
-    int gameHeight = 720;
+    private int gameWidth = 1280;
+    private int gameHeight = 720;
 
     //Canvas
-    GameCanvas canvas;
+    private GameCanvas canvas;
 
     //JFrames
-    JFrame canvasFrame;
-    JFrame splashFrame;
+    private JFrame canvasFrame;
+    private JFrame splashFrame;
 
     //JPanels
-    JPanel splashPanel;
-    JPanel mainMenuButtonsPanel;
-    JPanel newGamePanel;
-    JPanel settingButtonPanel;
-    JPanel rankingsButtonPanel;
-    JPanel levelSelectPanel;
+    private JPanel splashPanel;
+    private JPanel mainMenuButtonsPanel;
+    private JPanel newGamePanel;
+    private JPanel settingButtonPanel;
+    private JPanel rankingsButtonPanel;
+    private JPanel levelSelectPanel;
 
     //JLabel
-    JLabel namePromptLabel;
-    JLabel levelSelectLabel;
+    private JLabel namePromptLabel;
+    private JLabel levelSelectLabel;
 
     //Main Menu Buttons
-    JButton newGameButton;
-    JButton settingButton;
-    JButton rankingButton;
-    JButton exitButton;
-    JButton mainMenuBackButton;
-    JButton submitName;
-    JButton levelOneButton;
-    JButton levelTwoButton;
-    JButton levelThreeButton;
-    JButton levelSelectBack;
+    private JButton newGameButton;
+    private JButton settingButton;
+    private JButton rankingButton;
+    private JButton exitButton;
+    private JButton mainMenuBackButton;
+    private JButton submitName;
+    private JButton levelOneButton;
+    private JButton levelTwoButton;
+    private JButton levelThreeButton;
+    private JButton levelSelectBack;
 
     //JTextField
-    JTextField nameInput;
+    private JTextField nameInput;
 
     //Fonts
-    Font gameFont;
+    private Font gameFont;
 
     public GameWindow() {
         canvas = new GameCanvas();

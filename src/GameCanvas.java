@@ -12,7 +12,7 @@ import javax.swing.Timer;
 public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     private Rocket rocket;
-    Timer timer;
+    private Timer timer;
 
     private int time,time_min,time_ten, time_sec;
     private int xPos = 10;
@@ -25,7 +25,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     private final double THRUST_CONSTANT = 0.5;
     private final double GRAVITY_CONSTANT = 0.3;
 
-    Terrain terrain = new Terrain();
+    private Terrain terrain = new Terrain();
     public int level = 0;
 
     //Game Conditions
@@ -121,6 +121,11 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             rocket.setThrustAmount(rocket.getThrustAmount() - 0.1 );
         }
 
+        if(checkLandingCollision()){
+            landed = true;
+            System.out.println("LANDED");
+        }
+
         if(checkCollision()){
             landed = true;
             System.out.println("GameOver");
@@ -176,6 +181,13 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
         /* Check intersection with terrain. */
         return terrain.shape().intersects(boundingBox);
+    }
+
+    private boolean checkLandingCollision()
+    {
+        Rectangle2D boundingBox = rocket.getBoundingBox();
+
+        return terrain.getLandingPad().intersects(boundingBox);
     }
 
     @Override

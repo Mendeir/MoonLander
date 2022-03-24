@@ -304,6 +304,9 @@ public class GameWindow implements KeyListener, ActionListener {
          }
 
          if (event.getSource() == levelThreeButton) {
+             levelSelectPanel.setVisible(false);
+             canvas.setOnSplashScreen(false);
+             canvas.setGameStarted(true);
              canvas.level = 3;
              System.out.println("Level 3");
          }

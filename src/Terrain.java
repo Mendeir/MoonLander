@@ -137,21 +137,32 @@ public class Terrain
 
     public void levelOneLander(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.green);
+        g2.setColor(Color.YELLOW);
         g2.setFont(new Font("Courier",Font.BOLD,10));
         g2.drawString("Land Here",238,510);
+
+        g2.setPaint(new Color(200,200,200));
+        g2.fillRoundRect(230,490,70,10,5,5);
     }
     public void levelTwoLander(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.green);
+        g2.setColor(Color.YELLOW);
         g2.setFont(new Font("Courier",Font.BOLD,12));
         g2.drawString("2x",646,460);
+
+        g2.setPaint(new Color(200,200,200));
+        g2.fillRoundRect(640,440,25,10,5,5);
+
     }
     public void levelThreeLander(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.green);
+        g2.setColor(Color.YELLOW);
         g2.setFont(new Font("Courier",Font.BOLD,12));
         g2.drawString("4x",1180,660);
+
+        g2.setPaint(new Color(200,200,200));
+        g2.fillRoundRect(1160,640,50,10,5,5);
+
     }
 
     public int[] getTerrainX_axis() {

@@ -3,6 +3,7 @@ import java.awt.desktop.AboutEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 
 public class Rocket {
     //Rocket Attributes
@@ -11,6 +12,8 @@ public class Rocket {
     private double rotation;
     private int fuel;
     private boolean isThrusting;
+    private double baseX;
+    private double baseY;
 
     //Camera
     private double scale;
@@ -38,6 +41,7 @@ public class Rocket {
         rocketTop = new  Point2D.Double(xPosition, yPosition);
         rocketShape =  initializeLanderShape(rocketTop);
         flameShape = initializeThrusterShape(rocketTop);
+
     }
 
     public Shape getNewRotatedShape(Shape shape, double rotation){
@@ -91,6 +95,8 @@ public class Rocket {
         //set lander leg tips to be used for landing calculations
         rocketLefTip = new Point2D.Double(cx-8*scale,cy+10*scale);
         rocketRightTip = new Point2D.Double(cx+8*scale,cy+10*scale);
+
+        //lander.append(boundingBox(rocketTop),true);
         //return finished lander
         return lander;
     }
@@ -108,6 +114,13 @@ public class Rocket {
             thruster_flame.lineTo(cx+3*scale,cy+6*scale);
         }
         return thruster_flame;
+    }
+
+    public Rectangle2D boundingBox(Point2D center){
+        baseX = center.getX();
+        baseY = center.getY();
+
+        return new Rectangle2D.Double(baseX - 8,baseY - 10,15,25);
     }
 
     // setters and getters
@@ -128,4 +141,6 @@ public class Rocket {
     public boolean getThrusting(){ return isThrusting; }
     public void setThrustAmount(double amount){ thrustAmount = amount; }
     public double getThrustAmount() {return thrustAmount; }
+    public Rectangle2D getBoundingBox() {return boundingBox(rocketTop); }
+
 }

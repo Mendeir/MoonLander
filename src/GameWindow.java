@@ -220,11 +220,19 @@ public class GameWindow implements KeyListener, ActionListener {
 
         settingEasyButton = new JButton("Easy");
         settingEasyButton.setBounds(450, 380, 200, 50);
+        settingEasyButton.setBorderPainted(false);
+        settingEasyButton.setContentAreaFilled(false);
+        settingEasyButton.setFont(gameFont);
+        settingEasyButton.setForeground(Color.white);
         settingEasyButton.addActionListener(this);
         settingButtonPanel.add(settingEasyButton);
 
         settingHardButton = new JButton("Hard");
         settingHardButton.setBounds(450, 460, 200, 50);
+        settingHardButton.setBorderPainted(false);
+        settingHardButton.setContentAreaFilled(false);
+        settingHardButton.setFont(gameFont);
+        settingHardButton.setForeground(Color.white);
         settingHardButton.addActionListener(this);
         settingButtonPanel.add(settingHardButton);
 
@@ -236,11 +244,19 @@ public class GameWindow implements KeyListener, ActionListener {
 
         settingPlayButton = new JButton("Play");
         settingPlayButton.setBounds(300, 180, 200, 50);
+        settingPlayButton.setBorderPainted(false);
+        settingPlayButton.setContentAreaFilled(false);
+        settingPlayButton.setFont(gameFont);
+        settingPlayButton.setForeground(Color.white);
         settingPlayButton.addActionListener(this);
         settingButtonPanel.add(settingPlayButton);
 
         settingMuteButton = new JButton("Mute");
         settingMuteButton.setBounds(600, 180, 200, 50);
+        settingMuteButton.setBorderPainted(false);
+        settingMuteButton.setContentAreaFilled(false);
+        settingMuteButton.setFont(gameFont);
+        settingMuteButton.setForeground(Color.white);
         settingMuteButton.addActionListener(this);
         settingButtonPanel.add(settingMuteButton);
 
@@ -351,11 +367,11 @@ public class GameWindow implements KeyListener, ActionListener {
          }
 
           if (event.getSource() == settingEasyButton) {
-             System.out.println("Easy");
+             canvas.setDifficultyMultiplier(1);
           }
 
          if (event.getSource() == settingHardButton) {
-             System.out.println("Hard");
+             canvas.setDifficultyMultiplier(2);
          }
 
         if (event.getSource() == settingPlayButton) {

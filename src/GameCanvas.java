@@ -22,6 +22,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     private int delay;
     private int gameScore;
     private int scoreMultiplier;
+    private int difficultyMultiplier;
     private int finalGameScore;
     private boolean landed;
     private double rotation;
@@ -297,6 +298,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             if (landed) {
                 System.out.println(gameScore);
                 finalGameScore += fuel + gameScore;
+                scoreMultiplier *= difficultyMultiplier;
                 finalGameScore *= scoreMultiplier;
                 System.out.println(finalGameScore);
             }
@@ -343,5 +345,9 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     public void setScoreMultiplier(int scoreMultiplier) {
         this.scoreMultiplier = scoreMultiplier;
+    }
+
+    public void setDifficultyMultiplier(int difficultyMultiplier) {
+        this.difficultyMultiplier = difficultyMultiplier;
     }
 }

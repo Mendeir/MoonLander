@@ -38,12 +38,12 @@ public class GameWindow implements KeyListener, ActionListener {
 
     private JLabel namePromptLabel;
     private JLabel levelSelectLabel;
-    JLabel settingDifficultyLabel;
-    JLabel rankingLabel;
-    JLabel rankingLevelOneLabel;
-    JLabel rankingLevelTwoLabel;
-    JLabel rankingLevelThreeLabel;
-    JLabel settingSoundsLabel;
+    private JLabel settingDifficultyLabel;
+    private JLabel rankingLabel;
+    private JLabel rankingLevelOneLabel;
+    private JLabel rankingLevelTwoLabel;
+    private JLabel rankingLevelThreeLabel;
+    private JLabel settingSoundsLabel;
   
     //Main Menu Buttons
     private JButton newGameButton;
@@ -56,10 +56,10 @@ public class GameWindow implements KeyListener, ActionListener {
     private JButton levelTwoButton;
     private JButton levelThreeButton;
     private JButton levelSelectBack;
-    JButton settingEasyButton;
-    JButton settingHardButton;
-    JButton settingPlayButton;
-    JButton settingMuteButton;
+    private JButton settingEasyButton;
+    private JButton settingHardButton;
+    private JButton settingPlayButton;
+    private JButton settingMuteButton;
 
     //JTextField
     private JTextField nameInput;

@@ -15,12 +15,13 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     private Timer timer;
 
     private int time,time_min,time_ten, time_sec;
-    private int xPos = 10;
-    private int yPos = 50;
-    private int fuel = 1000;
-    private int delay = 100;
-    private boolean landed = false;
-    private double rotation = 0;
+    private int xPos;
+    private int yPos;
+    private int fuel;
+    private int delay;
+    private int gameScore;
+    private boolean landed;
+    private double rotation;
 
     private final double THRUST_CONSTANT = 0.5;
     private final double GRAVITY_CONSTANT = 0.3;
@@ -35,8 +36,21 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     private JPanel mainMenuPanel;
 
     public GameCanvas(){
+        //Rocket Attributes
+        xPos = 10;
+        yPos = 50;
+        fuel = 1000;
+        delay = 100;
+
+        //Rocket State
+        landed = false;
+        rotation = 0;
+
+        //Game Information
         level = 0;
         time = 0;
+        gameScore = 0;
+
         onSplashScreen = true;
         gameStarted = false;
         rocket = new Rocket(xPos,yPos,fuel);

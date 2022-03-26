@@ -368,10 +368,12 @@ public class GameWindow implements KeyListener, ActionListener {
 
           if (event.getSource() == settingEasyButton) {
              canvas.setDifficultyMultiplier(1);
+             canvas.setFuel(500);
           }
 
          if (event.getSource() == settingHardButton) {
              canvas.setDifficultyMultiplier(2);
+             canvas.setFuel(250);
          }
 
         if (event.getSource() == settingPlayButton) {

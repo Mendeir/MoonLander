@@ -33,6 +33,8 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     private int level;
 
     //Game Conditions
+    private boolean successfulLanding;
+    private boolean failLanding;
     private boolean gameStarted;
     private boolean onSplashScreen;
     private boolean onMainMenu;
@@ -48,6 +50,8 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         //Rocket State
         landed = false;
         rotation = 0;
+        successfulLanding = false;
+        failLanding = false;
 
         //Game Information
         level = 0;
@@ -76,12 +80,11 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
            mainMenuWindow(graphic);
         }
 
-        if (!gameStarted) {
+        if (!landed)
+            gameScore -= 1;
+
+        if (landed) {
             timer.stop();
-            System.out.println(gameScore);
-            finalGameScore += fuel + gameScore;
-            finalGameScore *= scoreMultiplier;
-            System.out.println(finalGameScore);
         }
 
         if (gameStarted) {
@@ -146,18 +149,20 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         }
 
         if(checkLandingCollision()){
+            successfulLanding = true;
             landed = true;
             System.out.println("LANDED");
         }
 
-        if(checkCollision()){
+        if(checkTerrainCollision()){
+            failLanding = true;
             landed = true;
             System.out.println("GameOver");
         }
 
 
         g.draw(rocket.getFlameShape());
-        gameScore -= 1;
+
         paintDetails(g);
         if(landed){
             paintResult(g);
@@ -218,7 +223,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         }
     }
 
-    private boolean checkCollision()
+    private boolean checkTerrainCollision()
     {
         /* Get bounding box of lander. */
         Rectangle2D boundingBox = rocket.getBoundingBox();
@@ -288,6 +293,14 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             rocket.setRotation(rotation);
         }
 
+        if(e.getKeyCode() == e.VK_M) {
+            if (landed) {
+                System.out.println(gameScore);
+                finalGameScore += fuel + gameScore;
+                finalGameScore *= scoreMultiplier;
+                System.out.println(finalGameScore);
+            }
+        }
 
     }
 

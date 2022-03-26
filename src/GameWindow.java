@@ -67,6 +67,9 @@ public class GameWindow implements KeyListener, ActionListener {
     //Fonts
     private Font gameFont;
 
+    //Audio
+    private Clip clip;
+
     //JSlider
     //JSlider soundSlider;
 
@@ -77,9 +80,8 @@ public class GameWindow implements KeyListener, ActionListener {
             gameFont = Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")).deriveFont(30f);
             GraphicsEnvironment graphicEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
             graphicEnvironment.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")));
-            File file = new File("C:\\Users\\Levi\\IdeaProjects\\MoonLander\\src\\assets\\sounds\\Space-bleeps-electronic-music-loop.wav");
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
-            Clip clip = AudioSystem.getClip();
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("src\\assets\\sounds\\Space-bleeps-electronic-music-loop.wav"));
+            clip = AudioSystem.getClip();
             clip.open(audioStream);
             clip.start();
             clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -357,12 +359,11 @@ public class GameWindow implements KeyListener, ActionListener {
          }
 
         if (event.getSource() == settingPlayButton) {
-            System.out.println("Play Sounds");
+            clip.start();
         }
 
         if (event.getSource() == settingMuteButton) {
-           // clip.stop();
-            System.out.println("Mute Sounds");
+            clip.stop();
         }
 
          if (event.getSource() == rankingButton) {

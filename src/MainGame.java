@@ -7,11 +7,6 @@ import java.sql.Statement;
 public class MainGame {
 
     public static void main(String[] args) {
-
-        Database newDatabase = new Database();
-        //newDatabase.insertDatabase("lorene",1,69);
-        //newDatabase.displayDatabase();
-
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GameWindow window = new GameWindow();

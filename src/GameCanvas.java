@@ -20,6 +20,8 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     private int fuel;
     private int delay;
     private int gameScore;
+    private int scoreMultiplier;
+    private int finalGameScore;
     private boolean landed;
     private double rotation;
 
@@ -73,8 +75,13 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
            mainMenuWindow(graphic);
         }
 
-        if (!gameStarted)
+        if (!gameStarted) {
             timer.stop();
+            System.out.println(gameScore);
+            finalGameScore += fuel + gameScore;
+            finalGameScore *= scoreMultiplier;
+            System.out.println(finalGameScore);
+        }
 
         if (gameStarted) {
             Graphics2D graphic2D = (Graphics2D)graphic;
@@ -149,6 +156,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
 
         g.draw(rocket.getFlameShape());
+        gameScore -= 1;
         paintDetails(g);
         return buffed;
     }
@@ -188,6 +196,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         g2.setFont(font);
         g2.drawString("Time: " + time_min + ":" + time_ten + time_sec,1000,40);
         g2.drawString("Fuel: " + fuel,1000,90);
+        g2.drawString("Score: " + gameScore, 1000, 140);
     }
 
     private boolean checkCollision()
@@ -295,5 +304,9 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public void setScoreMultiplier(int scoreMultiplier) {
+        this.scoreMultiplier = scoreMultiplier;
     }
 }

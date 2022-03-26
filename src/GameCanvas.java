@@ -13,21 +13,24 @@ import javax.swing.Timer;
 public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     private Rocket rocket;
-    Timer timer;
+    private Timer timer;
 
     private int time,time_min,time_ten, time_sec;
-    private int xPos = 10;
-    private int yPos = 50;
-    private int fuel = 20;
-    private int delay = 100;
-    private boolean landed = false;
-    private double rotation = 0;
+    private int xPos;
+    private int yPos;
+    private int fuel;
+    private int delay;
+    private int gameScore;
+    private int scoreMultiplier;
+    private int finalGameScore;
+    private boolean landed;
+    private double rotation;
 
     private final double THRUST_CONSTANT = 0.5;
     private final double GRAVITY_CONSTANT = 0.3;
 
-    Terrain terrain = new Terrain();
-    public int level = 0;
+    private Terrain terrain = new Terrain();
+    private int level;
 
     //Game Conditions
     private boolean gameStarted;
@@ -36,7 +39,21 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     private JPanel mainMenuPanel;
 
     public GameCanvas(){
+        //Rocket Attributes
+        xPos = 10;
+        yPos = 50;
+        fuel = 1000;
+        delay = 100;
+
+        //Rocket State
+        landed = false;
+        rotation = 0;
+
+        //Game Information
+        level = 0;
         time = 0;
+        gameScore = 5000;
+
         onSplashScreen = true;
         gameStarted = false;
         rocket = new Rocket(xPos,yPos,fuel);
@@ -59,15 +76,21 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
            mainMenuWindow(graphic);
         }
 
+        if (!gameStarted) {
+            timer.stop();
+            System.out.println(gameScore);
+            finalGameScore += fuel + gameScore;
+            finalGameScore *= scoreMultiplier;
+            System.out.println(finalGameScore);
+        }
 
         if (gameStarted) {
             Graphics2D graphic2D = (Graphics2D)graphic;
 
             BufferedImage gameView = bufferedGame();
 
-            if (gameStarted) {
-                timer.start();
-            }
+            timer.start();
+
             graphic2D.drawImage(gameView,0,0,null);
             terrain.draw(graphic);
 
@@ -122,6 +145,11 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             rocket.setThrustAmount(rocket.getThrustAmount() - 0.1 );
         }
 
+        if(checkLandingCollision()){
+            landed = true;
+            System.out.println("LANDED");
+        }
+
         if(checkCollision()){
             landed = true;
             System.out.println("GameOver");
@@ -129,6 +157,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
 
         g.draw(rocket.getFlameShape());
+        gameScore -= 1;
         paintDetails(g);
         if(landed){
             paintResult(g);
@@ -171,6 +200,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         g2.setFont(font);
         g2.drawString("Time: " + time_min + ":" + time_ten + time_sec,1000,40);
         g2.drawString("Fuel: " + fuel,1000,90);
+        g2.drawString("Score: " + gameScore, 1000, 140);
     }
 
     public void paintResult(Graphics2D g2){
@@ -195,6 +225,13 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
         /* Check intersection with terrain. */
         return terrain.shape().intersects(boundingBox);
+    }
+
+    private boolean checkLandingCollision()
+    {
+        Rectangle2D boundingBox = rocket.getBoundingBox();
+
+        return terrain.getLandingPad().intersects(boundingBox);
     }
 
     @Override
@@ -285,5 +322,13 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     public void setGameStarted(boolean gameStarted) {
         this.gameStarted = gameStarted;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setScoreMultiplier(int scoreMultiplier) {
+        this.scoreMultiplier = scoreMultiplier;
     }
 }

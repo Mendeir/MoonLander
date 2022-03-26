@@ -49,7 +49,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         //Game Information
         level = 0;
         time = 0;
-        gameScore = 0;
+        gameScore = 5000;
 
         onSplashScreen = true;
         gameStarted = false;

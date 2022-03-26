@@ -14,58 +14,58 @@ import javax.sound.sampled.*;
 public class GameWindow implements KeyListener, ActionListener {
 
     //Username
-    String username;
+    private String username;
 
     //Screen Dimension
-    int gameWidth = 1280;
-    int gameHeight = 720;
+    private int gameWidth = 1280;
+    private int gameHeight = 720;
 
     //Canvas
-    GameCanvas canvas;
+    private GameCanvas canvas;
 
     //JFrames
-    JFrame canvasFrame;
-    JFrame splashFrame;
+    private JFrame canvasFrame;
+    private JFrame splashFrame;
 
     //JPanels
-    JPanel splashPanel;
-    JPanel mainMenuButtonsPanel;
-    JPanel newGamePanel;
-    JPanel settingButtonPanel;
-    JPanel rankingsButtonPanel;
-    JPanel levelSelectPanel;
+    private JPanel splashPanel;
+    private JPanel mainMenuButtonsPanel;
+    private JPanel newGamePanel;
+    private JPanel settingButtonPanel;
+    private JPanel rankingsButtonPanel;
+    private JPanel levelSelectPanel;
 
-    //JLabel
-    JLabel namePromptLabel;
-    JLabel levelSelectLabel;
+
+    private JLabel namePromptLabel;
+    private JLabel levelSelectLabel;
     JLabel settingDifficultyLabel;
     JLabel rankingLabel;
     JLabel rankingLevelOneLabel;
     JLabel rankingLevelTwoLabel;
     JLabel rankingLevelThreeLabel;
     JLabel settingSoundsLabel;
-
+  
     //Main Menu Buttons
-    JButton newGameButton;
-    JButton settingButton;
-    JButton rankingButton;
-    JButton exitButton;
-    JButton mainMenuBackButton;
-    JButton submitName;
-    JButton levelOneButton;
-    JButton levelTwoButton;
-    JButton levelThreeButton;
-    JButton levelSelectBack;
+    private JButton newGameButton;
+    private JButton settingButton;
+    private JButton rankingButton;
+    private JButton exitButton;
+    private JButton mainMenuBackButton;
+    private JButton submitName;
+    private JButton levelOneButton;
+    private JButton levelTwoButton;
+    private JButton levelThreeButton;
+    private JButton levelSelectBack;
     JButton settingEasyButton;
     JButton settingHardButton;
     JButton settingPlayButton;
     JButton settingMuteButton;
 
     //JTextField
-    JTextField nameInput;
+    private JTextField nameInput;
 
     //Fonts
-    Font gameFont;
+    private Font gameFont;
 
     //JSlider
     //JSlider soundSlider;
@@ -115,6 +115,10 @@ public class GameWindow implements KeyListener, ActionListener {
 
     public void createMainMenuBackButton() {
         mainMenuBackButton = new JButton ("Back");
+        mainMenuBackButton.setBorderPainted(false);
+        mainMenuBackButton.setContentAreaFilled(false);
+        mainMenuBackButton.setFont(gameFont);
+        mainMenuBackButton.setForeground(Color.white);
         mainMenuBackButton.setBounds(0, 0, 150, 50);
         mainMenuBackButton.addActionListener(this);
         mainMenuBackButton.setVisible(true);
@@ -126,21 +130,37 @@ public class GameWindow implements KeyListener, ActionListener {
         mainMenuButtonsPanel.setVisible(false);
 
         newGameButton = new JButton("New Game");
+        newGameButton.setBorderPainted(false);
+        newGameButton.setContentAreaFilled(false);
+        newGameButton.setFont(gameFont);
+        newGameButton.setForeground(Color.white);
         newGameButton.setBounds(0, 0, 400, 60);
         newGameButton.addActionListener(this);
         mainMenuButtonsPanel.add(newGameButton);
 
         settingButton = new JButton("Settings");
+        settingButton.setBorderPainted(false);
+        settingButton.setContentAreaFilled(false);
+        settingButton.setFont(gameFont);
+        settingButton.setForeground(Color.white);
         settingButton.setBounds(0, 75, 400, 60);
         settingButton.addActionListener(this);
         mainMenuButtonsPanel.add(settingButton);
 
         rankingButton = new JButton("Rankings");
+        rankingButton.setBorderPainted(false);
+        rankingButton.setContentAreaFilled(false);
+        rankingButton.setFont(gameFont);
+        rankingButton.setForeground(Color.white);
         rankingButton.setBounds(0, 150, 400, 60);
         rankingButton.addActionListener(this);
         mainMenuButtonsPanel.add(rankingButton);
 
         exitButton = new JButton("Exit");
+        exitButton.setBorderPainted(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setFont(gameFont);
+        exitButton.setForeground(Color.white);
         exitButton.setBounds(0, 225, 400, 60);
         exitButton.addActionListener(this);
         mainMenuButtonsPanel.add(exitButton);
@@ -172,6 +192,10 @@ public class GameWindow implements KeyListener, ActionListener {
         newGamePanel.add(nameInput);
 
         submitName = new JButton("Start");
+        submitName.setBorderPainted(false);
+        submitName.setContentAreaFilled(false);
+        submitName.setFont(gameFont);
+        submitName.setForeground(Color.white);
         submitName.setBounds(490, 320, 150, 50);
         submitName.addActionListener(this);
         newGamePanel.add(submitName);
@@ -270,21 +294,37 @@ public class GameWindow implements KeyListener, ActionListener {
         levelSelectPanel.add(levelSelectLabel);
 
         levelOneButton = new JButton("Level 1");
+        levelOneButton.setBorderPainted(false);
+        levelOneButton.setContentAreaFilled(false);
+        levelOneButton.setFont(gameFont);
+        levelOneButton.setForeground(Color.white);
         levelOneButton.setBounds(460, 260, 200, 50);
         levelOneButton.addActionListener(this);
         levelSelectPanel.add(levelOneButton);
 
         levelTwoButton = new JButton("Level 2");
+        levelTwoButton.setBorderPainted(false);
+        levelTwoButton.setContentAreaFilled(false);
+        levelTwoButton.setFont(gameFont);
+        levelTwoButton.setForeground(Color.white);
         levelTwoButton.setBounds(460, 320, 200, 50);
         levelTwoButton.addActionListener(this);
         levelSelectPanel.add(levelTwoButton);
 
         levelThreeButton = new JButton("Level 3");
+        levelThreeButton.setBorderPainted(false);
+        levelThreeButton.setContentAreaFilled(false);
+        levelThreeButton.setFont(gameFont);
+        levelThreeButton.setForeground(Color.white);
         levelThreeButton.setBounds(460, 380, 200, 50);
         levelThreeButton.addActionListener(this);
         levelSelectPanel.add(levelThreeButton);
 
         levelSelectBack = new JButton("Back");
+        levelSelectBack.setBorderPainted(false);
+        levelSelectBack.setContentAreaFilled(false);
+        levelSelectBack.setFont(gameFont);
+        levelSelectBack.setForeground(Color.white);
         levelSelectBack.setBounds(460, 440, 200, 50);
         levelSelectBack.addActionListener(this);
         levelSelectPanel.add(levelSelectBack);
@@ -351,14 +391,30 @@ public class GameWindow implements KeyListener, ActionListener {
          }
 
          if (event.getSource() == levelOneButton) {
-             System.out.println("Level 1");
+             levelSelectPanel.setVisible(false);
+             canvas.setOnSplashScreen(false);
+             canvas.setGameStarted(true);
+             canvas.setLevel(1);
+             canvas.setScoreMultiplier(1);
+             canvas.repaint();
          }
 
          if (event.getSource() == levelTwoButton) {
+             levelSelectPanel.setVisible(false);
+             canvas.setOnSplashScreen(false);
+             canvas.setGameStarted(true);
+             canvas.setLevel(2);
+             canvas.setScoreMultiplier(2);
+             canvas.repaint();
              System.out.println("Level 2");
          }
 
          if (event.getSource() == levelThreeButton) {
+             levelSelectPanel.setVisible(false);
+             canvas.setOnSplashScreen(false);
+             canvas.setGameStarted(true);
+             canvas.setScoreMultiplier(4);
+             canvas.setLevel(3);
              System.out.println("Level 3");
          }
 
@@ -385,6 +441,14 @@ public class GameWindow implements KeyListener, ActionListener {
                 mainMenuButtonsPanel.setVisible(true);
                 canvas.repaint();
             }
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_M) {
+            canvas.setOnSplashScreen(true);
+            canvas.setGameStarted(false);
+            canvas.setLevel(0);
+            mainMenuButtonsPanel.setVisible(true);
+            canvas.repaint();
         }
     }
 

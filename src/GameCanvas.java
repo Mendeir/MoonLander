@@ -3,6 +3,7 @@ import java.awt.event.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 import javax.imageio.ImageIO;
@@ -158,6 +159,9 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         g.draw(rocket.getFlameShape());
         gameScore -= 1;
         paintDetails(g);
+        if(landed){
+            paintResult(g);
+        }
         return buffed;
     }
 
@@ -197,6 +201,21 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         g2.drawString("Time: " + time_min + ":" + time_ten + time_sec,1000,40);
         g2.drawString("Fuel: " + fuel,1000,90);
         g2.drawString("Score: " + gameScore, 1000, 140);
+    }
+
+    public void paintResult(Graphics2D g2){
+        try{
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")).deriveFont(30f);
+            g2.setFont(font);
+            if(landed){
+                g2.drawString("Level Finished",500,200);
+            }else{
+                g2.drawString("Game Over",500,200);
+            }
+            g2.drawString("Press m to continue...",500,300);
+        }catch (FontFormatException | IOException e){
+            e.printStackTrace();
+        }
     }
 
     private boolean checkCollision()
@@ -253,7 +272,10 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == e.VK_UP){
-            rocket.setThrusting(true);
+            if(fuel != 0)
+                rocket.setThrusting(true);
+            else
+                rocket.setThrusting(false);
         }
 
         if(e.getKeyCode() == e.VK_LEFT){

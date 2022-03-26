@@ -45,7 +45,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         //Rocket Attributes
         xPos = 10;
         yPos = 50;
-        fuel = 1000;
+        fuel = 500;
         delay = 100;
 
         //Rocket State
@@ -58,7 +58,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         level = 0;
         time = 0;
         gameScore = 5000;
-
+        difficultyMultiplier = 1;
         onSplashScreen = true;
         gameStarted = false;
         rocket = new Rocket(xPos,yPos,fuel);
@@ -213,9 +213,10 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         try{
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")).deriveFont(30f);
             g2.setFont(font);
-            if(landed){
+            if(successfulLanding){
                 g2.drawString("Level Finished",500,200);
-            }else{
+            }
+            if(failLanding){
                 g2.drawString("Game Over",500,200);
             }
             g2.drawString("Press m to continue...",500,300);
@@ -349,5 +350,9 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     public void setDifficultyMultiplier(int difficultyMultiplier) {
         this.difficultyMultiplier = difficultyMultiplier;
+    }
+
+    public void setFuel(int fuel) {
+        this.fuel = fuel;
     }
 }

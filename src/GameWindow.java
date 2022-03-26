@@ -495,4 +495,7 @@ public class GameWindow implements KeyListener, ActionListener {
 
     }*/
 
+    public String getUsername() {
+        return username;
+    }
 }

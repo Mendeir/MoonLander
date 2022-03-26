@@ -9,9 +9,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.sound.sampled.*;
 
 public class GameWindow implements KeyListener, ActionListener {
+
+
+
+    private Database data;
 
     //Username
     private String username;
@@ -44,6 +49,15 @@ public class GameWindow implements KeyListener, ActionListener {
     private JLabel rankingLevelTwoLabel;
     private JLabel rankingLevelThreeLabel;
     private JLabel settingSoundsLabel;
+    private JLabel rank1one;
+    private JLabel rank2one;
+    private JLabel rank3one;
+    private JLabel rank1two;
+    private JLabel rank2two;
+    private JLabel rank3two;
+    private JLabel rank1three;
+    private JLabel rank2three;
+    private JLabel rank3three;
   
     //Main Menu Buttons
     private JButton newGameButton;
@@ -70,11 +84,11 @@ public class GameWindow implements KeyListener, ActionListener {
     //Audio
     private Clip clip;
 
-    //JSlider
-    //JSlider soundSlider;
 
     public GameWindow() {
         canvas = new GameCanvas();
+        data = new Database();
+
 
         try {
             gameFont = Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")).deriveFont(30f);
@@ -265,6 +279,7 @@ public class GameWindow implements KeyListener, ActionListener {
     }
 
     public void createRankingButton() {
+        data.retrieveDatabase();
         rankingsButtonPanel = new JPanel();
         rankingsButtonPanel.setBounds((gameWidth - 1100) / 2, 40, 1100, 600);
         rankingsButtonPanel.setBackground(new Color(0, 0, 0, (float) 0.7));
@@ -283,17 +298,71 @@ public class GameWindow implements KeyListener, ActionListener {
         rankingLevelOneLabel.setForeground(Color.WHITE);
         rankingsButtonPanel.add(rankingLevelOneLabel);
 
+        rank1one = new JLabel(data.getLevelOneList().get(0).toString());
+        rank1one.setBounds(190, 280, 200, 50);
+        rank1one.setFont(gameFont);
+        rank1one.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rank1one);
+
+        rank2one = new JLabel(data.getLevelOneList().get(1).toString());
+        rank2one.setBounds(190, 380, 200, 50);
+        rank2one.setFont(gameFont);
+        rank2one.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rank2one);
+
+        rank3one = new JLabel(data.getLevelOneList().get(2).toString());
+        rank3one.setBounds(190, 480, 200, 50);
+        rank3one.setFont(gameFont);
+        rank3one.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rank3one);
+
         rankingLevelTwoLabel = new JLabel("Level 2");
         rankingLevelTwoLabel.setBounds(480, 180, 200, 50);
         rankingLevelTwoLabel.setFont(gameFont);
         rankingLevelTwoLabel.setForeground(Color.WHITE);
         rankingsButtonPanel.add(rankingLevelTwoLabel);
 
+        rank1two = new JLabel(data.getLevelTwoList().get(0).toString());
+        rank1two.setBounds(480, 280, 200, 50);
+        rank1two.setFont(gameFont);
+        rank1two.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rank1two);
+
+        rank2two = new JLabel(data.getLevelTwoList().get(1).toString());
+        rank2two.setBounds(480, 380, 200, 50);
+        rank2two.setFont(gameFont);
+        rank2two.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rank2two);
+
+        rank3two = new JLabel(data.getLevelTwoList().get(2).toString());
+        rank3two.setBounds(480, 480, 200, 50);
+        rank3two.setFont(gameFont);
+        rank3two.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rank3two);
+
         rankingLevelThreeLabel = new JLabel("Level 3");
         rankingLevelThreeLabel.setBounds(770, 180, 200, 50);
         rankingLevelThreeLabel.setFont(gameFont);
         rankingLevelThreeLabel.setForeground(Color.WHITE);
         rankingsButtonPanel.add(rankingLevelThreeLabel);
+
+        rank1three = new JLabel(data.getLevelThreeList().get(0).toString());
+        rank1three.setBounds(770, 280, 200, 50);
+        rank1three.setFont(gameFont);
+        rank1three.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rank1three);
+
+        rank2three = new JLabel(data.getLevelThreeList().get(1).toString());
+        rank2three.setBounds(770, 380, 200, 50);
+        rank2three.setFont(gameFont);
+        rank2three.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rank2three);
+
+        rank3three = new JLabel(data.getLevelThreeList().get(2).toString());
+        rank3three.setBounds(770, 480, 200, 50);
+        rank3three.setFont(gameFont);
+        rank3three.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rank3three);
 
         canvasFrame.add(rankingsButtonPanel);
     }
@@ -388,6 +457,9 @@ public class GameWindow implements KeyListener, ActionListener {
              mainMenuButtonsPanel.setVisible(false);
              rankingsButtonPanel.add(mainMenuBackButton);
              rankingsButtonPanel.setVisible(true);
+
+
+
          }
 
          if (event.getSource() == mainMenuBackButton) {
@@ -465,8 +537,9 @@ public class GameWindow implements KeyListener, ActionListener {
         if (e.getKeyCode() == KeyEvent.VK_M) {
             canvas.setOnSplashScreen(true);
             canvas.setGameStarted(false);
-            canvas.setLevel(0);
             mainMenuButtonsPanel.setVisible(true);
+            data.insertDatabase(getUsername(),canvas.getLevel(),canvas.getFinalGameScore());
+            canvas.setLevel(0);
             canvas.repaint();
         }
     }

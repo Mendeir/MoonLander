@@ -1,9 +1,15 @@
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.*;
 
 public class GameWindow implements KeyListener, ActionListener {
 
@@ -29,10 +35,16 @@ public class GameWindow implements KeyListener, ActionListener {
     private JPanel rankingsButtonPanel;
     private JPanel levelSelectPanel;
 
-    //JLabel
+
     private JLabel namePromptLabel;
     private JLabel levelSelectLabel;
-
+    JLabel settingDifficultyLabel;
+    JLabel rankingLabel;
+    JLabel rankingLevelOneLabel;
+    JLabel rankingLevelTwoLabel;
+    JLabel rankingLevelThreeLabel;
+    JLabel settingSoundsLabel;
+  
     //Main Menu Buttons
     private JButton newGameButton;
     private JButton settingButton;
@@ -44,12 +56,19 @@ public class GameWindow implements KeyListener, ActionListener {
     private JButton levelTwoButton;
     private JButton levelThreeButton;
     private JButton levelSelectBack;
+    JButton settingEasyButton;
+    JButton settingHardButton;
+    JButton settingPlayButton;
+    JButton settingMuteButton;
 
     //JTextField
     private JTextField nameInput;
 
     //Fonts
     private Font gameFont;
+
+    //JSlider
+    //JSlider soundSlider;
 
     public GameWindow() {
         canvas = new GameCanvas();
@@ -58,9 +77,20 @@ public class GameWindow implements KeyListener, ActionListener {
             gameFont = Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")).deriveFont(30f);
             GraphicsEnvironment graphicEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
             graphicEnvironment.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src\\assets\\font\\gameFont.ttf")));
+            File file = new File("C:\\Users\\Levi\\IdeaProjects\\MoonLander\\src\\assets\\sounds\\Space-bleeps-electronic-music-loop.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
     }
@@ -180,6 +210,39 @@ public class GameWindow implements KeyListener, ActionListener {
         settingButtonPanel.setLayout(null);
         settingButtonPanel.setVisible(false);
 
+        settingDifficultyLabel = new JLabel("Difficulty");
+        settingDifficultyLabel.setBounds(475, 300, 200, 50);
+        settingDifficultyLabel.setFont(gameFont);
+        settingDifficultyLabel.setForeground(Color.WHITE);
+        settingButtonPanel.add(settingDifficultyLabel);
+
+        settingEasyButton = new JButton("Easy");
+        settingEasyButton.setBounds(450, 380, 200, 50);
+        settingEasyButton.addActionListener(this);
+        settingButtonPanel.add(settingEasyButton);
+
+        settingHardButton = new JButton("Hard");
+        settingHardButton.setBounds(450, 460, 200, 50);
+        settingHardButton.addActionListener(this);
+        settingButtonPanel.add(settingHardButton);
+
+        settingSoundsLabel = new JLabel("Sounds");
+        settingSoundsLabel.setBounds(490, 100, 200, 50);
+        settingSoundsLabel.setFont(gameFont);
+        settingSoundsLabel.setForeground(Color.WHITE);
+        settingButtonPanel.add(settingSoundsLabel);
+
+        settingPlayButton = new JButton("Play");
+        settingPlayButton.setBounds(300, 180, 200, 50);
+        settingPlayButton.addActionListener(this);
+        settingButtonPanel.add(settingPlayButton);
+
+        settingMuteButton = new JButton("Mute");
+        settingMuteButton.setBounds(600, 180, 200, 50);
+        settingMuteButton.addActionListener(this);
+        settingButtonPanel.add(settingMuteButton);
+
+
         canvasFrame.add(settingButtonPanel);
     }
 
@@ -189,6 +252,30 @@ public class GameWindow implements KeyListener, ActionListener {
         rankingsButtonPanel.setBackground(new Color(0, 0, 0, (float) 0.7));
         rankingsButtonPanel.setLayout(null);
         rankingsButtonPanel.setVisible(false);
+
+        rankingLabel = new JLabel("Ranking");
+        rankingLabel.setBounds(470, 100, 200, 50);
+        rankingLabel.setFont(gameFont);
+        rankingLabel.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rankingLabel);
+
+        rankingLevelOneLabel = new JLabel("Level 1");
+        rankingLevelOneLabel.setBounds(190, 180, 200, 50);
+        rankingLevelOneLabel.setFont(gameFont);
+        rankingLevelOneLabel.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rankingLevelOneLabel);
+
+        rankingLevelTwoLabel = new JLabel("Level 2");
+        rankingLevelTwoLabel.setBounds(480, 180, 200, 50);
+        rankingLevelTwoLabel.setFont(gameFont);
+        rankingLevelTwoLabel.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rankingLevelTwoLabel);
+
+        rankingLevelThreeLabel = new JLabel("Level 3");
+        rankingLevelThreeLabel.setBounds(770, 180, 200, 50);
+        rankingLevelThreeLabel.setFont(gameFont);
+        rankingLevelThreeLabel.setForeground(Color.WHITE);
+        rankingsButtonPanel.add(rankingLevelThreeLabel);
 
         canvasFrame.add(rankingsButtonPanel);
     }
@@ -260,6 +347,23 @@ public class GameWindow implements KeyListener, ActionListener {
              settingButtonPanel.setVisible(true);
 
          }
+
+          if (event.getSource() == settingEasyButton) {
+             System.out.println("Easy");
+          }
+
+         if (event.getSource() == settingHardButton) {
+             System.out.println("Hard");
+         }
+
+        if (event.getSource() == settingPlayButton) {
+            System.out.println("Play Sounds");
+        }
+
+        if (event.getSource() == settingMuteButton) {
+           // clip.stop();
+            System.out.println("Mute Sounds");
+        }
 
          if (event.getSource() == rankingButton) {
              mainMenuButtonsPanel.setVisible(false);

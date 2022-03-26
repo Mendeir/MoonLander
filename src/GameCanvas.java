@@ -355,4 +355,12 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
     public void setFuel(int fuel) {
         this.fuel = fuel;
     }
+
+    public int getFinalGameScore() {
+        return finalGameScore;
+    }
+
+    public int getLevel() {
+        return level;
+    }
 }

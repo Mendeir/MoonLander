@@ -415,6 +415,13 @@ public class GameWindow implements KeyListener, ActionListener {
              canvas.setGameStarted(true);
              canvas.setLevel(1);
              canvas.setScoreMultiplier(1);
+             canvas.setLanded(false);
+             canvas.setTime(0);
+             canvas.setTime_min(0);
+             canvas.setTime_ten(0);
+             canvas.setTime_sec(0);
+             canvas.setFuel(500);
+             canvas.setGameScore(5000);
              canvas.repaint();
          }
 
@@ -424,6 +431,13 @@ public class GameWindow implements KeyListener, ActionListener {
              canvas.setGameStarted(true);
              canvas.setLevel(2);
              canvas.setScoreMultiplier(2);
+             canvas.setLanded(false);
+             canvas.setTime(0);
+             canvas.setTime_min(0);
+             canvas.setTime_ten(0);
+             canvas.setTime_sec(0);
+             canvas.setFuel(500);
+             canvas.setGameScore(5000);
              canvas.repaint();
              System.out.println("Level 2");
          }
@@ -434,6 +448,13 @@ public class GameWindow implements KeyListener, ActionListener {
              canvas.setGameStarted(true);
              canvas.setScoreMultiplier(4);
              canvas.setLevel(3);
+             canvas.setLanded(false);
+             canvas.setTime(0);
+             canvas.setTime_min(0);
+             canvas.setTime_ten(0);
+             canvas.setTime_sec(0);
+             canvas.setFuel(500);
+             canvas.setGameScore(5000);
              System.out.println("Level 3");
          }
 

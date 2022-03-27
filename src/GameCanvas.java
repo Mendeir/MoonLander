@@ -50,9 +50,9 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
         //Rocket State
         landed = false;
-        rotation = 0;
         successfulLanding = false;
         failLanding = false;
+        rotation = 0;
 
         //Game Information
         level = 0;
@@ -85,7 +85,9 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             gameScore -= 1;
 
         if (landed) {
+            timer.restart();
             timer.stop();
+
         }
 
         if (gameStarted) {
@@ -103,14 +105,17 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
         if(level == 1){
             terrain.levelOneLander(graphic);
+
         }
 
         if(level == 2){
             terrain.levelTwoLander(graphic);
+
         }
 
         if(level == 3){
             terrain.levelThreeLander(graphic);
+
         }
     }
 
@@ -215,6 +220,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
             g2.setFont(font);
             if(successfulLanding){
                 g2.drawString("Level Finished",500,200);
+
             }
             if(failLanding){
                 g2.drawString("Game Over",500,200);
@@ -240,6 +246,8 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
         return terrain.getLandingPad().intersects(boundingBox);
     }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -301,6 +309,15 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
                 finalGameScore += fuel + gameScore;
                 scoreMultiplier *= difficultyMultiplier;
                 finalGameScore *= scoreMultiplier;
+                xPos = 10;
+                yPos = 50;
+                rotation = 0;
+                Point2D new_rocketTop = new Point2D.Double(xPos,yPos);
+                rocket.setRocketTop(new_rocketTop);
+                successfulLanding = false;
+                failLanding = false;
+                rocket.setHorizontalForce(0);
+                rocket.setVerticalForce(0);
                 System.out.println(finalGameScore);
             }
         }
@@ -340,9 +357,7 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
         this.gameStarted = gameStarted;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
-    }
+    public void setLevel(int level) { this.level = level; }
 
     public void setScoreMultiplier(int scoreMultiplier) {
         this.scoreMultiplier = scoreMultiplier;
@@ -362,5 +377,27 @@ public class GameCanvas extends JPanel implements KeyListener, ActionListener{
 
     public int getLevel() {
         return level;
+    }
+
+    public void setLanded(boolean landed) { this.landed = landed; }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public void setTime_min(int time_min) {
+        this.time_min = time_min;
+    }
+
+    public void setTime_ten(int time_ten) {
+        this.time_ten = time_ten;
+    }
+
+    public void setTime_sec(int time_sec) {
+        this.time_sec = time_sec;
+    }
+
+    public void setGameScore(int gameScore) {
+        this.gameScore = gameScore;
     }
 }
